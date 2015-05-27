@@ -26,35 +26,121 @@ from os.path import dirname
 
 import re
 
+""" Services """
+svc_sel = lx.service.Selection()
+svc_scn = lx.service.Scene()
+
+""" Names """
+# String literals are BANNED!!!1 Well not really,
+# but it's much safer to define them like this.
+NAME_NOTIFIER = 'sky.notifier'
+NAME_CMD_UPDATE = 'sky.update'
+NAME_CMD_SCRIPTLISTER = 'sky.projectScriptLister'
+
+""" Selection type integers """
+SELTYPE_ITEM = svc_sel.LookupType('item')
+
+""" Item type integers """
+ITEMTYPE_SCENE = svc_scn.ItemTypeLookup('scene')
+
+
+class SkyListener(lxifc.SceneItemListener, lxifc.SelectionListener):
+    def __init__ (self):
+        # We attach the listener.
+        self.listenerService = lx.service.Listener()
+        self.listenerService.AddListener(self)
+
+    def __del__ (self):
+        # In case we need to remove it...
+        self.listenerService.RemoveListener(self)
+    def notify(self):
+        notifier = SkyNotifier()
+        notifier.Notify(lx.symbol.fCMDNOTIFY_CHANGE_ALL)
+    def sil_SceneCreate(self,scene):
+        self.notify()
+    def sil_SceneDestroy(self,scene):
+        self.notify()
+    def sil_SceneFilename(self,scene,filename):
+        self.notify()
+    def sil_SceneClear(self,scene):
+        self.notify()
+    def selevent_Add(self,type,subType):
+        # Scene changes happen via an item selection apparently.
+        if type == SELTYPE_ITEM:
+            if subType == ITEMTYPE_SCENE:
+                self.notify()
+
+# We don't need to bless a listener,
+# we just need to call it once
+SkyListener()
+
+# I've no idea what any of this means,
+# but apparently it needs to be there.
+class SkyNotifier(lxifc.Notifier,lxifc.CommandEvent):
+    masterList = {}
+    def noti_Name(self):
+        return NAME_NOTIFIER
+    def noti_AddClient(self,event):
+        self.masterList[event.__peekobj__()] = event
+    def noti_RemoveClient(self,event):
+        del self.masterList[event.__peekobj__()]
+    def Notify(self, flags):
+        for event in self.masterList:
+            evt = lx.object.CommandEvent(self.masterList[event])
+            evt.Event(flags)
  
+lx.bless(SkyNotifier, NAME_NOTIFIER)
+
+
+# Manual update command.
+class cmd_SkyNotify(lxu.command.BasicCommand):
+    def __init__(self):
+        lxu.command.BasicCommand.__init__(self)
+    def basic_Execute(self, msg, flags):
+        # We get an instance of the notifier,
+        # and then we call its Notify method,
+        # telling it to update everything.
+        notifier = SkyNotifier()
+        notifier.Notify(lx.symbol.fCMDNOTIFY_CHANGE_ALL)
+    def cmd_Flags(self):
+        # fCMD_UI since it's a UI command, and fCMD_INTERNAL
+        # to prevent it from appearing in the command list.
+        return lx.symbol.fCMD_UI | lx.symbol.fCMD_INTERNAL
+    def basic_Enable(self,msg):
+        return True
+
+lx.bless(cmd_SkyNotify, NAME_CMD_UPDATE)
+
+
 # The UIValueHints class we'll be using to manage the list and it's items
-class projectScriptListerPopup(lxifc.UIValueHints):
+class projectScriptListerPopup(lxu.command.BasicHints, lxifc.UIValueHints):
     def __init__(self, path):
-        listItemHandles = []
-        listItemNames = []
-        
-        if path == 0:
-            listItemHandles.append('unsaved')
-            listItemNames.append('(unsaved document)')
-            
+        # We attach our notifier
+        self._notifiers = [(NAME_NOTIFIER,'')]
         if path:
             filenames = listdir(path)
 
             # regex = re.compile(r'^\.')
             regex = re.compile('\.py$')
-            listItemHandles = [i for i in filenames if regex.search(i)]
-            listItemNames = [i for i in listItemHandles]
-            
-        listItemHandles.append('update')
-        listItemNames.append('(update list)')
+            filenames = [i for i in filenames if regex.search(i)]
 
-        # the list we'll be using to populate the example pop-up. Note that it's a list
-        # of two tuples. The first tuple contains the 'InternalNames' of the items and
-        # the second contains the 'friendly' or 'UserNames'.
-        # Adam: Since we're using filenames, the 'friendly' names are the same as the
-        # actual filenames, so we just use the same list twice.
-        self._items = [listItemHandles,listItemNames]
+            # the list we'll be using to populate the example pop-up. Note that it's a list
+            # of two tuples. The first tuple contains the 'InternalNames' of the items and
+            # the second contains the 'friendly' or 'UserNames'.
+            # Adam: Since we're using filenames, the 'friendly' names are the same as the
+            # actual filenames, so we just use the same list twice.
+            # We use the filenames[:] syntax to make copies instead of just pointing to
+            # the same list.
+            self._items = [filenames[:],filenames[:]]
+        else:
+            empty = ['']
+            emptyun = ['(empty)']
+            self._items = [empty,emptyun]
 
+        # We add our update command to the bottom of the list.
+        self._items[0].append(NAME_CMD_UPDATE)
+        self._items[1].append('(update)')
+ 
     def uiv_Flags(self):
         # This can be a series of flags, but in this case we're only returning
         # ''fVALHINT_POPUPS'' to indicate that we just need a straight pop-up
@@ -83,7 +169,7 @@ class projectScriptListerCmd(lxu.command.BasicCommand):
         # is static rather than dynamic and ''TextValueHints'' are used. Currently
         # ''TextValueHints'' aren't implemented in the python API so it's
         # adviseable to use a string attribute.
-        self.dyna_Add('project scripts', lx.symbol.sTYPE_STRING)
+        self.dyna_Add('scripts', lx.symbol.sTYPE_STRING)
         # Set the attribute's queriable flag
         self.basic_SetFlags(0, lx.symbol.fCMDARG_QUERY)
  
@@ -91,15 +177,19 @@ class projectScriptListerCmd(lxu.command.BasicCommand):
     def arg_UIValueHints(self, index):
         # create an instance of our pop-up list object passing it the
         # list of commands.
+
         filepath = lx.eval('query sceneservice scene.file ? current')
-        if index == 0:
-            if filepath:
-                path = dirname(filepath)
-            else:
-                path = 0
-            return projectScriptListerPopup(path)
+
+        if filepath:
+            path = dirname(filepath)
         else:
-            return 0
+            path = None
+
+
+        # We *HAVE* to return the UIValueHints here, regardless
+        # of the path, otherwise nothing works!
+        # Invalid paths are handled by it.
+        return projectScriptListerPopup(path)
  
     def cmd_Execute(self,flags):
         # in the execute method we're going to store the current value of our
@@ -109,24 +199,21 @@ class projectScriptListerCmd(lxu.command.BasicCommand):
         # we'd want to be using persistent storage but for simplicity in this
         # example we'll use a UserValue.
         if self.dyna_IsSet(0):
-            if self.dyna_String(0) == 'update':
-                lx.out('Update Code Goes Here.')
-            elif self.dyna_String(0) == 'unsaved':
-                lx.out('Unsaved document.')
+            value = self.dyna_String(0)
+            if value == NAME_CMD_UPDATE:
+                # Apparently we fired the update command:
+                lx.eval(NAME_CMD_UPDATE)
+                return lx.result.OK
             else:
-                filepath = lx.eval('query sceneservice scene.file ? current')
-                path = dirname(filepath)
-                lx.eval('@{'+path+'/%s}' % self.dyna_String(0))
+                path_scene = lx.eval('query sceneservice scene.file ? current')
+                path = os.path.join(dirname(path_scene), value)
+                if os.path.isfile(path):
+                    lx.eval('@{%s}' % path)
  
     def cmd_Query(self,index,vaQuery):
-        # In the query method we need to retrieve the value we stored in the execute
-        # method and add it to a ValueArray object to be returned by the query.
-        va = lx.object.ValueArray(vaQuery)
-        
-        if index == 0:
-            # retrieve the value we stored earlier and add it to the ValueArray
-            va.AddString(self.dyna_String(0))
+        # We don't actually need to return anything from the query
+        # It just needs to be queryable to create the UI...
         return lx.result.OK
  
 # bless() the command to register it as a plugin
-lx.bless(projectScriptListerCmd, "sky.projectScriptLister")
+lx.bless(projectScriptListerCmd, NAME_CMD_SCRIPTLISTER)
