@@ -35,19 +35,22 @@ class projectScriptListerPopup(lxifc.UIValueHints):
 
             # regex = re.compile(r'^\.')
             regex = re.compile('\.py$')
-            filenames = [i for i in filenames if regex.search(i)]
+            listItemHandles = [i for i in filenames if regex.search(i)]
+            listItemNames = [i for i in listItemHandles]
+            
+        listItemHandles.append('- ')
+        listItemNames.append('- ')
+            
+        listItemHandles.append('update')
+        listItemNames.append('(update list)')
 
-            # the list we'll be using to populate the example pop-up. Note that it's a list
-            # of two tuples. The first tuple contains the 'InternalNames' of the items and
-            # the second contains the 'friendly' or 'UserNames'.
-            # Adam: Since we're using filenames, the 'friendly' names are the same as the
-            # actual filenames, so we just use the same list twice.
-            self._items = [filenames,filenames]
-        else:
-            empty = ['']
-            emptyun = ['(empty)']
-            self._items = [empty,emptyun]
- 
+        # the list we'll be using to populate the example pop-up. Note that it's a list
+        # of two tuples. The first tuple contains the 'InternalNames' of the items and
+        # the second contains the 'friendly' or 'UserNames'.
+        # Adam: Since we're using filenames, the 'friendly' names are the same as the
+        # actual filenames, so we just use the same list twice.
+        self._items = [listItemHandles,listItemNames]
+
     def uiv_Flags(self):
         # This can be a series of flags, but in this case we're only returning
         # ''fVALHINT_POPUPS'' to indicate that we just need a straight pop-up
@@ -102,16 +105,18 @@ class projectScriptListerCmd(lxu.command.BasicCommand):
         # we'd want to be using persistent storage but for simplicity in this
         # example we'll use a UserValue.
         if self.dyna_IsSet(0):
-            filepath = lx.eval('query sceneservice scene.file ? current')
-            path = dirname(filepath)
-            lx.eval('@{'+path+'/%s}' % self.dyna_String(0))
+            if self.dyna_String(0) == 'update':
+                lx.out('Update Code Goes Here.')
+            else:
+                filepath = lx.eval('query sceneservice scene.file ? current')
+                path = dirname(filepath)
+                lx.eval('@{'+path+'/%s}' % self.dyna_String(0))
  
     def cmd_Query(self,index,vaQuery):
         # In the query method we need to retrieve the value we stored in the execute
         # method and add it to a ValueArray object to be returned by the query.
-        va = lx.object.ValueArray()
-        # Initialise the ValueArray
-        va.set(vaQuery)
+        va = lx.object.ValueArray(vaQuery)
+        
         if index == 0:
             # retrieve the value we stored earlier and add it to the ValueArray
             va.AddString(self.dyna_String(0))
