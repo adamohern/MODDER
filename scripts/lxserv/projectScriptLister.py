@@ -30,6 +30,13 @@ import re
 # The UIValueHints class we'll be using to manage the list and it's items
 class projectScriptListerPopup(lxifc.UIValueHints):
     def __init__(self, path):
+        listItemHandles = []
+        listItemNames = []
+        
+        if path == 0:
+            listItemHandles.append('unsaved')
+            listItemNames.append('(unsaved document)')
+            
         if path:
             filenames = listdir(path)
 
@@ -37,9 +44,6 @@ class projectScriptListerPopup(lxifc.UIValueHints):
             regex = re.compile('\.py$')
             listItemHandles = [i for i in filenames if regex.search(i)]
             listItemNames = [i for i in listItemHandles]
-            
-        listItemHandles.append('- ')
-        listItemNames.append('- ')
             
         listItemHandles.append('update')
         listItemNames.append('(update list)')
@@ -91,9 +95,9 @@ class projectScriptListerCmd(lxu.command.BasicCommand):
         if index == 0:
             if filepath:
                 path = dirname(filepath)
-                return projectScriptListerPopup(path)
             else:
-                return 0
+                path = 0
+            return projectScriptListerPopup(path)
         else:
             return 0
  
