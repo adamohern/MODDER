@@ -1,0 +1,3 @@
+#python
+
+lx.out('polo!')

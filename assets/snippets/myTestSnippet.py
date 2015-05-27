@@ -1,0 +1,3 @@
+#python
+
+lx.eval('render')

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<configuration>
+  <atom type="Attributes">
+    <hash type="Sheet" key="sky_py.58367595996:sheet">
+      <atom type="Label">Sky Py</atom>
+      <atom type="Export">1</atom>
+      <atom type="Layout">htoolbar</atom>
+      <atom type="Justification">left</atom>
+      <atom type="EditorColor">327680</atom>
+      <atom type="Group">mechanicalColor</atom>
+      <hash type="InCategory" key="menubar#tail">
+        <atom type="Ordinal">49.57.54</atom>
+      </hash>
+      <list type="Control" val="cmd @{kit_mecco_sky_py:scripts/sky.runWorkingFile.py}">
+        <atom type="Label">run...</atom>
+        <atom type="StartCollapsed">0</atom>
+        <atom type="Hash">82791741566:control</atom>
+      </list>
+      <list type="Control" val="cmd @{kit_mecco_sky_py:scripts/sky.setWorkingFile.py}">
+        <atom type="Label">set</atom>
+        <atom type="PopupFace">both</atom>
+        <atom type="StartCollapsed">0</atom>
+        <atom type="Hash">78424596039:control</atom>
+      </list>
+      <list type="Control" val="cmd @{kit_mecco_sky_py:scripts/sky.openWorkingFile.py}">
+        <atom type="Label">open</atom>
+        <atom type="StartCollapsed">0</atom>
+        <atom type="Hash">30167739931:control</atom>
+      </list>
+      <list type="Control" val="cmd @{kit_mecco_sky_py:scripts/sky.newScript.py}">
+        <atom type="Label">new</atom>
+        <atom type="StartCollapsed">0</atom>
+        <atom type="Hash">23890018535:control</atom>
+      </list>
+      <list type="Control" val="div ">
+        <atom type="Label">snippets</atom>
+        <atom type="Alignment">full</atom>
+        <atom type="StartCollapsed">0</atom>
+        <atom type="Hash">12703006232:control</atom>
+      </list>
+      <list type="Control" val="cmd file.open {kit_mecco_sky_py:assets/snippets}">
+        <atom type="Label">snippets...</atom>
+        <atom type="StartCollapsed">0</atom>
+        <atom type="Hash">44349006212:control</atom>
+      </list>
+      <list type="Control" val="cmd @{kit_mecco_sky_py:scripts/sky.newSnippet.py}">
+        <atom type="Label">new</atom>
+        <atom type="StartCollapsed">0</atom>
+        <atom type="Hash">74802017184:control</atom>
+      </list>
+      <list type="Control" val="div ">
+        <atom type="Label">Layout</atom>
+        <atom type="Alignment">full</atom>
+        <atom type="StartCollapsed">0</atom>
+        <atom type="Hash">32509018928:control</atom>
+      </list>
+      <list type="Control" val="cmd layout.createOrClose &quot;sky_py mini&quot; &quot;sky_py mini&quot; title:&quot;sky_py mini&quot; width:800 height:800">
+        <atom type="Label">palette</atom>
+        <atom type="StartCollapsed">0</atom>
+        <atom type="Hash">34934018910:control</atom>
+      </list>
+      <list type="Control" val="cmd layout.restore &quot;sky_py&quot;">
+        <atom type="Label">layout</atom>
+        <atom type="StartCollapsed">0</atom>
+        <atom type="Hash">00791019112:control</atom>
+      </list>
+    </hash>
+  </atom>
+</configuration>

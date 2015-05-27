@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <atom type="Frame">
+    <hash type="Layout" key="base.sky_py mini" val="applicationLayout">
+      <atom type="IdealSize">1902 1010</atom>
+      <list type="Port">vpgroup 0 1 0 1 sky_py_1x_vp_89364743837</list>
+      <atom type="PostRestoreCommand"></atom>
+      <atom type="Icon"></atom>
+      <atom type="InputRemappingContext"></atom>
+      <atom type="Tooltip"></atom>
+      <atom type="SwitcherClass">normal</atom>
+      <atom type="SwitcherThumbnail"></atom>
+    </hash>
+    <hash type="Layout" key="base.vpgroupLayout_sky1x-6004" val="viewportGroup">
+      <atom type="IdealSize">1894 983</atom>
+      <list type="VDiv">0.0335707</list>
+      <list type="Port">attrform 0 1 0 1 vpgroupLayout_sky1x-6004_vp_13368743838</list>
+      <list type="Port">vpgroup 0 1 1 2 vpgroupLayout_sky1x-6004_vp_41463743839</list>
+      <atom type="PostRestoreCommand"></atom>
+      <atom type="Icon"></atom>
+      <atom type="InputRemappingContext"></atom>
+      <atom type="Tooltip"></atom>
+      <atom type="SwitcherClass"></atom>
+      <atom type="SwitcherThumbnail"></atom>
+    </hash>
+    <hash type="Layout" key="base.vpgroupLayout_sky1x-6005" val="viewportGroup">
+      <atom type="IdealSize">1886 923</atom>
+      <list type="VDiv">0.4994583</list>
+      <list type="Port">vptab 0 1 1 2 vpgroupLayout_sky1x-6005_vp_11440743840</list>
+      <list type="Port">cmdhist 0 1 0 1 vpgroupLayout_sky1x-6005_vp_03348743841</list>
+      <atom type="PostRestoreCommand"></atom>
+      <atom type="Icon"></atom>
+      <atom type="InputRemappingContext"></atom>
+      <atom type="Tooltip"></atom>
+      <atom type="SwitcherClass"></atom>
+      <atom type="SwitcherThumbnail"></atom>
+    </hash>
+    <hash type="vpgroup" key="base.sky_py_1x_vp_89364743837" val="listed">
+      <atom type="framePreset">vpgroupLayout_sky1x-6004</atom>
+      <atom type="instanceSource"></atom>
+      <atom type="ViewportLock2">0 0</atom>
+      <atom type="MinHeader">1</atom>
+      <atom type="QuadLock">0</atom>
+      <atom type="ViewportTitle">Viewport Group</atom>
+      <atom type="ViewportClass">vpapplication</atom>
+    </hash>
+    <hash type="vpgroup" key="base.vpgroupLayout_sky1x-6004_vp_41463743839" val="listed">
+      <atom type="framePreset">vpgroupLayout_sky1x-6005</atom>
+      <atom type="instanceSource"></atom>
+      <atom type="ViewportLock2">0 0</atom>
+      <atom type="MinHeader">1</atom>
+      <atom type="QuadLock">0</atom>
+      <atom type="ViewportTitle">Viewport Group</atom>
+      <atom type="ViewportClass">vpapplication</atom>
+    </hash>
+    <hash type="attrform" key="base.vpgroupLayout_sky1x-6004_vp_13368743838" val="listed">
+      <list type="ExportedSheet">sky_py.58367595996:sheet</list>
+      <atom type="TrackFormEdSelection">0</atom>
+      <atom type="PreviousTabHash"></atom>
+      <atom type="Cookie">01349743691:StartCollapsed</atom>
+      <atom type="ViewportLock2">0 0</atom>
+      <atom type="MinHeader">1</atom>
+      <atom type="QuadLock">0</atom>
+      <atom type="ViewportTitle">sky_py_tools01</atom>
+      <atom type="ViewportClass">vpapplication</atom>
+    </hash>
+    <hash type="vptab" key="base.sky_py_1x_vp_27622743622" val="listed">
+      <atom type="Hash">Uber_Tabs_Layout:tabbedvp</atom>
+      <atom type="CurrentTab">0</atom>
+      <list type="Tab" val="vpgroup base.ModelViewSingle_tab">
+        <atom type="Title">Model</atom>
+        <atom type="IsUserTitle">1</atom>
+      </list>
+      <list type="Tab" val="vpgroup ModelViewQuad_tab">
+        <atom type="Title">Model Quad</atom>
+        <atom type="IsUserTitle">1</atom>
+      </list>
+      <list type="Tab" val="vpgroup Paint_and_Sculpt_tab">
+        <atom type="Title">Paint</atom>
+        <atom type="IsUserTitle">1</atom>
+      </list>
+      <list type="Tab" val="vpgroup Topo_Editor_tab">
+        <atom type="Title">Topo</atom>
+        <atom type="IsUserTitle">1</atom>
+      </list>
+      <list type="Tab" val="vpgroup UV_Editor_tab">
+        <atom type="Title">UV</atom>
+        <atom type="IsUserTitle">1</atom>
+      </list>
+      <list type="Tab" val="vpgroup Layout_tab">
+        <atom type="Title">Layout</atom>
+        <atom type="IsUserTitle">1</atom>
+      </list>
+      <list type="Tab" val="vpgroup Setup_tab">
+        <atom type="Title">Setup</atom>
+        <atom type="IsUserTitle">1</atom>
+      </list>
+      <list type="Tab" val="vpgroup Animate_tab">
+        <atom type="Title">Animate</atom>
+        <atom type="IsUserTitle">1</atom>
+      </list>
+      <list type="Tab" val="vpgroup Render_View_tab">
+        <atom type="Title">Render</atom>
+        <atom type="IsUserTitle">1</atom>
+      </list>
+      <atom type="ViewportLock2">0 0</atom>
+      <atom type="MinHeader">0</atom>
+      <atom type="QuadLock">0</atom>
+      <atom type="ViewportTitle">Tabbed Viewport</atom>
+      <atom type="ViewportClass">vpapplication</atom>
+    </hash>
+    <hash type="vptab" key="base.vpgroupLayout_sky1x-6005_vp_11440743840" val="listed">
+      <atom type="Hash">71099743802:tabbedvp</atom>
+      <atom type="CurrentTab">0</atom>
+      <list type="Tab" val="logview base.sky1x_clone0">
+        <atom type="Title">Event Log</atom>
+        <atom type="IsUserTitle">0</atom>
+      </list>
+      <list type="Tab" val="activityview edit.23974743816:tabpreset">
+        <atom type="Title">Activity View</atom>
+        <atom type="IsUserTitle">0</atom>
+      </list>
+      <atom type="ViewportLock2">0 0</atom>
+      <atom type="MinHeader">0</atom>
+      <atom type="QuadLock">0</atom>
+      <atom type="ViewportTitle">Tabbed Viewport</atom>
+      <atom type="ViewportClass">vpapplication</atom>
+    </hash>
+    <hash type="cmdhist" key="base.vpgroupLayout_sky1x-6005_vp_03348743841" val="listed">
+      <atom type="mode">history</atom>
+      <atom type="showUIOnly">1</atom>
+      <atom type="showSideEffect">1</atom>
+      <atom type="colWidthUndoTab">225 300 425 50</atom>
+      <atom type="colWidtHistoryTab">225 300 425 50</atom>
+      <atom type="colWidthListTab">225 450 400 1</atom>
+      <atom type="colWidthScriptsTab">225 424</atom>
+      <atom type="colWidthResultsTab">300 698</atom>
+      <atom type="filterState">0</atom>
+      <atom type="lineInterpreter">command</atom>
+      <atom type="ExpansionCookie">04739743725:FoldStates</atom>
+      <atom type="filterStringUndoTab"></atom>
+      <atom type="filterCriteriaUndoTab">0</atom>
+      <atom type="filterStringHistTab"></atom>
+      <atom type="filterCriteriaHistTab">0</atom>
+      <atom type="filterStringListTab"></atom>
+      <atom type="filterCriteriaListTab">0</atom>
+      <atom type="filterStringScriptsTab"></atom>
+      <atom type="filterCriteriaScriptsTab">0</atom>
+      <atom type="ViewportLock2">0 0</atom>
+      <atom type="MinHeader">1</atom>
+      <atom type="QuadLock">0</atom>
+      <atom type="ViewportTitle">Command History</atom>
+      <atom type="ViewportClass">vputility</atom>
+    </hash>
+    <hash type="logview" key="base.sky1x_clone0" val="listed">
+      <atom type="ViewportLock2">0 0</atom>
+      <atom type="MinHeader">0</atom>
+      <atom type="QuadLock">0</atom>
+      <atom type="ViewportTitle">Event Log</atom>
+      <atom type="ViewportClass">vpapplication</atom>
+    </hash>
+  </atom>
+</configuration>
