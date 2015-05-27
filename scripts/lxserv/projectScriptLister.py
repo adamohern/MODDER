@@ -25,6 +25,7 @@ from os.path import join
 from os.path import dirname
 
 import re
+import time
 
 """ Services """
 svc_sel = lx.service.Selection()
@@ -35,6 +36,7 @@ svc_scn = lx.service.Scene()
 # but it's much safer to define them like this.
 NAME_NOTIFIER = 'sky.notifier'
 NAME_CMD_UPDATE = 'sky.update'
+NAME_CMD_NEW = 'sky.newProjectScript'
 NAME_CMD_SCRIPTLISTER = 'sky.projectScriptLister'
 
 """ Selection type integers """
@@ -112,6 +114,71 @@ class cmd_SkyNotify(lxu.command.BasicCommand):
 lx.bless(cmd_SkyNotify, NAME_CMD_UPDATE)
 
 
+# New file command.
+class cmd_newProjectScript(lxu.command.BasicCommand):
+    def __init__(self):
+        lxu.command.BasicCommand.__init__(self)
+    def basic_Execute(self, msg, flags):
+        
+        kit_path  = lx.eval("query platformservice alias ? {kit_mecco_sky_py:}")
+        proto = join(kit_path,'assets','snippets','blank.py')
+        lx.out('proto: '+proto)
+        
+        filepath = lx.eval('query sceneservice scene.file ? current')
+        path = dirname(filepath)
+        
+        valHandle = "sky_tmp"
+        valType = 'string'
+        nicename = "Script Name"
+        default = ''
+        if lx.eval('query scriptsysservice userValue.isDefined ? %s' % valHandle) == 0:
+            lx.eval('user.defNew %s %s' % (valHandle, valType))
+
+        try:
+            lx.eval('user.def %s username {%s}' % (valHandle, nicename))
+            lx.eval('user.def %s type %s' % (valHandle, valType))
+            lx.eval('user.value %s {%s}' % (valHandle, default))
+            lx.eval('user.value %s' % valHandle)
+            name = lx.eval('user.value %s value:?' % valHandle)
+        except:
+            name = 'script_'+time.strftime('%Y%m%d%H%M%S')
+        #Remove .py and add it back again just in case user
+        #forgets to include it when typing the name.
+        name = re.sub('\.py$','',name)
+        name = name + '.py'
+        
+        dest = join(path,name)
+        lx.out('script destination: '+dest)
+        
+        try:
+            lx.eval('select.filepath {%s} set' % proto)
+            lx.out('selected proto '+proto)
+
+            try:
+                shutil.copyfile(proto,dest)
+                lx.out('successfully duplicated \'' + proto + '\' to \'' + dest + '\'')
+
+                try:
+                    lx.eval('file.open {%s}' % dest)
+                except:
+                    lx.out('could not open \'' + dest + '\'')
+
+            except:
+                lx.out('could not duplicate prototype:\n \'' + proto + '\' \nto:\n \'' + dest + '\'')
+
+        except:
+            lx.out('could  not select proto '+proto)
+                
+    def cmd_Flags(self):
+        # fCMD_UI since it's a UI command, and fCMD_INTERNAL
+        # to prevent it from appearing in the command list.
+        return lx.symbol.fCMD_UI | lx.symbol.fCMD_INTERNAL
+    def basic_Enable(self,msg):
+        return True
+
+lx.bless(cmd_newProjectScript, NAME_CMD_NEW)
+
+
 # The UIValueHints class we'll be using to manage the list and it's items
 class projectScriptListerPopup(lxu.command.BasicHints, lxifc.UIValueHints):
     def __init__(self, path):
@@ -132,14 +199,20 @@ class projectScriptListerPopup(lxu.command.BasicHints, lxifc.UIValueHints):
             # We use the filenames[:] syntax to make copies instead of just pointing to
             # the same list.
             self._items = [filenames[:],filenames[:]]
+            
+            # We add our update and new commands to the bottom of the list.
+            self._items[0].append(NAME_CMD_NEW)
+            self._items[1].append('(new...)')
+            
         else:
             empty = ['']
-            emptyun = ['(empty)']
+            emptyun = ['(unsaved)']
             self._items = [empty,emptyun]
 
-        # We add our update command to the bottom of the list.
+        
         self._items[0].append(NAME_CMD_UPDATE)
-        self._items[1].append('(update)')
+        self._items[1].append('(refresh)')
+        
  
     def uiv_Flags(self):
         # This can be a series of flags, but in this case we're only returning
@@ -203,6 +276,9 @@ class projectScriptListerCmd(lxu.command.BasicCommand):
             if value == NAME_CMD_UPDATE:
                 # Apparently we fired the update command:
                 lx.eval(NAME_CMD_UPDATE)
+                return lx.result.OK
+            elif value == NAME_CMD_NEW:
+                lx.eval(NAME_CMD_NEW)
                 return lx.result.OK
             else:
                 path_scene = lx.eval('query sceneservice scene.file ? current')
