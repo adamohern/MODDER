@@ -111,6 +111,8 @@ class projectScriptListerCmd(lxu.command.BasicCommand):
         if self.dyna_IsSet(0):
             if self.dyna_String(0) == 'update':
                 lx.out('Update Code Goes Here.')
+            elif self.dyna_String(0) == 'unsaved':
+                lx.out('Unsaved document.')
             else:
                 filepath = lx.eval('query sceneservice scene.file ? current')
                 path = dirname(filepath)
