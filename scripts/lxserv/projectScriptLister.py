@@ -30,18 +30,23 @@ import re
 # The UIValueHints class we'll be using to manage the list and it's items
 class projectScriptListerPopup(lxifc.UIValueHints):
     def __init__(self, path):
-        filenames = listdir(path)
+        if path:
+            filenames = listdir(path)
 
-        # regex = re.compile(r'^\.')
-        regex = re.compile('\.py$')
-        filenames = [i for i in filenames if regex.search(i)]
-        
-        # the list we'll be using to populate the example pop-up. Note that it's a list
-        # of two tuples. The first tuple contains the 'InternalNames' of the items and
-        # the second contains the 'friendly' or 'UserNames'.
-        # Adam: Since we're using filenames, the 'friendly' names are the same as the
-        # actual filenames, so we just use the same list twice.
-        self._items = [filenames,filenames]
+            # regex = re.compile(r'^\.')
+            regex = re.compile('\.py$')
+            filenames = [i for i in filenames if regex.search(i)]
+
+            # the list we'll be using to populate the example pop-up. Note that it's a list
+            # of two tuples. The first tuple contains the 'InternalNames' of the items and
+            # the second contains the 'friendly' or 'UserNames'.
+            # Adam: Since we're using filenames, the 'friendly' names are the same as the
+            # actual filenames, so we just use the same list twice.
+            self._items = [filenames,filenames]
+        else:
+            empty = ['']
+            emptyun = ['(empty)']
+            self._items = [empty,emptyun]
  
     def uiv_Flags(self):
         # This can be a series of flags, but in this case we're only returning
@@ -71,7 +76,7 @@ class projectScriptListerCmd(lxu.command.BasicCommand):
         # is static rather than dynamic and ''TextValueHints'' are used. Currently
         # ''TextValueHints'' aren't implemented in the python API so it's
         # adviseable to use a string attribute.
-        self.dyna_Add('scripts', lx.symbol.sTYPE_STRING)
+        self.dyna_Add('project scripts', lx.symbol.sTYPE_STRING)
         # Set the attribute's queriable flag
         self.basic_SetFlags(0, lx.symbol.fCMDARG_QUERY)
  
