@@ -20,9 +20,11 @@ import lx
 import lxifc
 import lxu.command
 
+
 from os import listdir
 from os.path import join
 from os.path import dirname
+from os.path import isfile
 
 import re
 import time
@@ -285,8 +287,8 @@ class projectScriptListerCmd(lxu.command.BasicCommand):
                 return lx.result.OK
             else:
                 path_scene = lx.eval('query sceneservice scene.file ? current')
-                path = os.path.join(dirname(path_scene), value)
-                if os.path.isfile(path):
+                path = join(dirname(path_scene), value)
+                if isfile(path):
                     lx.eval('@{%s}' % path)
  
     def cmd_Query(self,index,vaQuery):
