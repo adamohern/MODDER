@@ -34,8 +34,6 @@ import inspect
 DEBUG_MODE = 1
 
 """ Strings """
-DEFAULT_SCRIPT_NAME = ""
-USER_VAL_NICENAME = "Script Name"
 NEW = "(new...)"
 REFRESH = "(refresh)"
 UNSAVED = "(unsaved)"
@@ -45,13 +43,10 @@ svc_sel = lx.service.Selection()
 svc_scn = lx.service.Scene()
 
 """ Names """
-# String literals are BANNED!!!1 Well not really,
-# but it's much safer to define them like this.
 NAME_NOTIFIER = 'sky.notifier'
 NAME_CMD_UPDATE = 'sky.update'
-NAME_CMD_NEW = 'sky.newProjectScript'
+NAME_CMD_NEW = '+@sky.newProjectScript.py'
 NAME_CMD_SCRIPTLISTER = 'sky.projectScriptLister'
-USER_VAL_HANDLE = "sky.scriptName"
 
 """ Symbols """
 fCMDARG_OPTIONAL = lx.symbol.fCMDARG_OPTIONAL
@@ -92,6 +87,56 @@ class SkyListener(lxifc.SceneItemListener, lxifc.SelectionListener):
         if type == SELTYPE_ITEM:
             if subType == ITEMTYPE_SCENE:
                 self.notify()
+
+    def sil_ItemPreChange(self,scene):
+        pass
+    def sil_ItemPostDelete(self,scene):
+        pass
+    def sil_ItemAdd(self,item):
+        pass
+    def sil_ItemRemove(self,item):
+        pass
+    def sil_ItemParent(self,item):
+        pass
+    def sil_ItemChild(self,item):
+        pass
+    def sil_ItemAddChannel(self,item):
+        pass
+    def sil_ItemLocal(self,item):
+        pass
+    def sil_ItemName(self,item):
+        pass
+    def sil_ItemSource(self,item):
+        pass
+    def sil_ItemPackage(self,item):
+        pass
+    def sil_ChannelValue(self,action,item,index):
+        pass
+    def sil_LinkAdd(self,graph,itemFrom,itemTo):
+        pass
+    def sil_LinkRemBefore(self,graph,itemFrom,itemTo):
+        pass
+    def sil_LinkRemAfter(self,graph,itemFrom,itemTo):
+        pass
+    def sil_LinkSet(self,graph,itemFrom,itemTo):
+        pass
+    def sil_ChanLinkAdd(self,graph,itemFrom,chanFrom,itemTo,chanTo):
+        pass
+    def sil_ChanLinkRemBefore(self,graph,itemFrom,chanFrom,itemTo,chanTo):
+        pass
+    def sil_ChanLinkRemAfter(self,graph,itemFrom,chanFrom,itemTo,chanTo):
+        pass
+    def sil_ChanLinkSet(self,graph,itemFrom,chanFrom,itemTo,chanTo):
+        pass
+
+    def selevent_Current(self,type):
+        pass
+    def selevent_Remove(self,type,subtType):
+        pass
+    def selevent_Time(self,time):
+        pass
+    def selevent_TimeRange(self,type):
+        pass
 
 # We don't need to bless a listener,
 # we just need to call it once
@@ -135,56 +180,6 @@ class cmd_SkyNotify(lxu.command.BasicCommand):
 lx.bless(cmd_SkyNotify, NAME_CMD_UPDATE)
 
 
-# New file command.
-class cmd_newProjectScript(lxu.command.BasicCommand):
-    def __init__(self):
-        lxu.command.BasicCommand.__init__(self)
-
-    def basic_Execute(self, msg, flags):
-        
-        kit_path  = lx.eval("query platformservice alias ? {kit_mecco_sky_py:}")
-        proto = join(kit_path,'assets','snippets','blank.py')
-        lx.out('script template: ' + proto)
-        
-        filepath = lx.eval('query sceneservice scene.file ? current')
-        path = dirname(filepath)
-        
-        lx.eval('+@sky.quickUserVal.py %s string {%s} %s' % (USER_VAL_HANDLE,USER_VAL_NICENAME,DEFAULT_SCRIPT_NAME))
-        name = re.sub('\.py$','',name)
-        name = name + '.py'
-        
-        dest = join(path,name)
-        lx.out('script destination: ' + dest)
-        
-        try:
-            lx.eval('select.filepath {%s} set' % proto)
-            lx.out('selected proto '+proto)
-
-            try:
-                shutil.copyfile(proto,dest)
-                lx.out('successfully duplicated \'' + proto + '\' to \'' + dest + '\'')
-
-                try:
-                    lx.eval('file.open {%s}' % dest)
-                except:
-                    lx.out('could not open \'' + dest + '\'')
-
-            except:
-                lx.out('could not duplicate prototype:\n \'' + proto + '\' \nto:\n \'' + dest + '\'')
-
-        except:
-            lx.out('could  not select proto '+proto)
-                
-    def cmd_Flags(self):
-        # fCMD_UI since it's a UI command, and fCMD_INTERNAL
-        # to prevent it from appearing in the command list.
-        return lx.symbol.fCMD_UI | lx.symbol.fCMD_INTERNAL
-    def basic_Enable(self,msg):
-        return True
-
-lx.bless(cmd_newProjectScript, NAME_CMD_NEW)
-
-
 # The UIValueHints class we'll be using to manage the list and it's items
 class projectScriptListerPopup(lxu.command.BasicHints, lxifc.UIValueHints):
     def __init__(self, path):
@@ -206,8 +201,8 @@ class projectScriptListerPopup(lxu.command.BasicHints, lxifc.UIValueHints):
             # the same list.
             self._items = [filenames[:],filenames[:]]
             
-#            self._items[0].append(NAME_CMD_NEW)
-#            self._items[1].append(NEW)
+            self._items[0].append(NAME_CMD_NEW)
+            self._items[1].append(NEW)
 
         else:
             empty = ['']
@@ -289,7 +284,7 @@ class projectScriptListerCmd(lxu.command.BasicCommand):
                 path_scene = lx.eval('query sceneservice scene.file ? current')
                 path = join(dirname(path_scene), value)
                 if isfile(path):
-                    lx.eval('@{%s}' % path)
+                    lx.eval('++@{%s}' % path)
  
     def cmd_Query(self,index,vaQuery):
         # We don't actually need to return anything from the query

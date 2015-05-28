@@ -1,12 +1,9 @@
 #python
 
-import re
-import os
-from os.path import join
-import shutil
+import re, os, shutil
 
 kit_path  = lx.eval("query platformservice alias ? {kit_mecco_sky_py:}")
-proto = join(kit_path,'assets','snippets','blank.py')
+proto = os.join(kit_path,'assets','snippets','blank.py')
 
 lx.out('proto: '+proto)
 

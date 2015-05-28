@@ -26,5 +26,5 @@ try:
     lx.eval('attr.label {run: %s}' % basename(fileSelection));
 except:
     lx.out("sky.setWorkingFile.py: user aborted");
-2
+
 #lx.eval('user.value sky_working');

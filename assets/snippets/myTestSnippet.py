@@ -1,3 +1,0 @@
-#python
-
-lx.eval('render')

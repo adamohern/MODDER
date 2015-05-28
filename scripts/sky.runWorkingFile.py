@@ -1,5 +1,7 @@
 #python
 
+import lx
+
 if (lx.eval("query scriptsysservice userValue.isDefined ? sky_working")==0 or 
 	lx.eval('user.value sky_working ?')=='' or 
 	lx.eval('user.value sky_working ?')=='None'):

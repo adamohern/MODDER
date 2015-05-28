@@ -1,3 +1,0 @@
-#python
-
-lx.out("polo!")
