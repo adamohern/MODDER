@@ -32,10 +32,12 @@ import os, re, time, inspect
 DEBUG_MODE = 1
 
 """ Strings """
-NEW = "(new...)"
-REFRESH = "(refresh)"
-UNSAVED = "(unsaved)"
+NEW = "New Script"
+REFRESH = "Refresh List"
+UNSAVED = "..."
+NONE = "..."
 POPOVER_TOP_SLOT = "Project Scripts"
+DIVIDER = "- "
 
 """ Services """
 svc_sel = lx.service.Selection()
@@ -184,27 +186,37 @@ class projectScriptListerPopup(lxu.command.BasicHints, lxifc.UIValueHints):
     def __init__(self, path):
         # We attach our notifier
         self._notifiers = [(NAME_NOTIFIER,'')]
+
+        self._items = [['0'],[POPOVER_TOP_SLOT]]
+
         if path:
             filenames = [os.path.join(dp, f) for dp, dn, fn in os.walk(path) for f in fn]
 
-            # regex = re.compile(r'^\.')
             regex = re.compile('\.py$')
             filenames = [i for i in filenames if regex.search(i)]
 
-            # the list we'll be using to populate the example pop-up. Note that it's a list
-            # of two tuples. The first tuple contains the 'InternalNames' of the items and
-            # the second contains the 'friendly' or 'UserNames'.
-            # Adam: Since we're using filenames, the 'friendly' names are the same as the
-            # actual filenames, so we just use the same list twice.
-            # We use the filenames[:] syntax to make copies instead of just pointing to
-            # the same list.
-            self._items = [filenames[:],[os.path.basename(f) for f in filenames][:]]
+            if filenames:
+                self._items[0].append('0')
+                self._items[1].append(DIVIDER)
+
+                self._items[0].extend(filenames[:])
+                self._items[1].extend([os.path.basename(f) for f in filenames][:])
+
+                self._items[0].append('0')
+                self._items[1].append(DIVIDER)
+
+            else:
+                self._items[0].append('0')
+                self._items[1].append(NONE)
+
+
             
             self._items[0].append(NAME_CMD_NEW)
             self._items[1].append(NEW)
 
         else:
-            self._items = ['0',UNSAVED]
+            self._items[0].append('0')
+            self._items[1].append(UNSAVED)
 
         
         self._items[0].append(NAME_CMD_UPDATE)
