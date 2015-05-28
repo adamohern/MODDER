@@ -26,7 +26,9 @@ from os.path import join
 from os.path import dirname
 from os.path import isfile
 
-import os, re, time, inspect
+import re
+import time
+import inspect
 
 """ Toggles """
 DEBUG_MODE = 1
@@ -35,7 +37,6 @@ DEBUG_MODE = 1
 NEW = "(new...)"
 REFRESH = "(refresh)"
 UNSAVED = "(unsaved)"
-POPOVER_TOP_SLOT = "Project Scripts"
 
 """ Services """
 svc_sel = lx.service.Selection()
@@ -185,7 +186,7 @@ class projectScriptListerPopup(lxu.command.BasicHints, lxifc.UIValueHints):
         # We attach our notifier
         self._notifiers = [(NAME_NOTIFIER,'')]
         if path:
-            filenames = [os.path.join(dp, f) for dp, dn, fn in os.walk(path) for f in fn]
+            filenames = listdir(path)
 
             # regex = re.compile(r'^\.')
             regex = re.compile('\.py$')
@@ -198,13 +199,15 @@ class projectScriptListerPopup(lxu.command.BasicHints, lxifc.UIValueHints):
             # actual filenames, so we just use the same list twice.
             # We use the filenames[:] syntax to make copies instead of just pointing to
             # the same list.
-            self._items = [filenames[:],[os.path.basename(f) for f in filenames][:]]
+            self._items = [filenames[:],filenames[:]]
             
             self._items[0].append(NAME_CMD_NEW)
             self._items[1].append(NEW)
 
         else:
-            self._items = ['0',UNSAVED]
+            empty = ['']
+            emptyun = [UNSAVED]
+            self._items = [empty,emptyun]
 
         
         self._items[0].append(NAME_CMD_UPDATE)
