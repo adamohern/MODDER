@@ -26,6 +26,17 @@ from os.path import dirname
 
 import re
 import time
+import inspect
+
+""" Toggles """
+DEBUG_MODE = 1
+
+""" Strings """
+DEFAULT_SCRIPT_NAME = ""
+USER_VAL_NICENAME = "Script Name"
+NEW = "(new...)"
+REFRESH = "(refresh)"
+UNSAVED = "(unsaved)"
 
 """ Services """
 svc_sel = lx.service.Selection()
@@ -38,6 +49,10 @@ NAME_NOTIFIER = 'sky.notifier'
 NAME_CMD_UPDATE = 'sky.update'
 NAME_CMD_NEW = 'sky.newProjectScript'
 NAME_CMD_SCRIPTLISTER = 'sky.projectScriptLister'
+USER_VAL_HANDLE = "sky.scriptName"
+
+""" Symbols """
+fCMDARG_OPTIONAL = lx.symbol.fCMDARG_OPTIONAL
 
 """ Selection type integers """
 SELTYPE_ITEM = svc_sel.LookupType('item')
@@ -45,6 +60,10 @@ SELTYPE_ITEM = svc_sel.LookupType('item')
 """ Item type integers """
 ITEMTYPE_SCENE = svc_scn.ItemTypeLookup('scene')
 
+def bugger(comment=0):
+    if DEBUG_MODE:
+        comment = ": " + comment if comment else ""
+        lx.out("line " + str(inspect.currentframe().f_back.f_lineno) + comment)
 
 class SkyListener(lxifc.SceneItemListener, lxifc.SelectionListener):
     def __init__ (self):
@@ -118,37 +137,22 @@ lx.bless(cmd_SkyNotify, NAME_CMD_UPDATE)
 class cmd_newProjectScript(lxu.command.BasicCommand):
     def __init__(self):
         lxu.command.BasicCommand.__init__(self)
+
     def basic_Execute(self, msg, flags):
         
         kit_path  = lx.eval("query platformservice alias ? {kit_mecco_sky_py:}")
         proto = join(kit_path,'assets','snippets','blank.py')
-        lx.out('proto: '+proto)
+        lx.out('script template: ' + proto)
         
         filepath = lx.eval('query sceneservice scene.file ? current')
         path = dirname(filepath)
         
-        valHandle = "sky_tmp"
-        valType = 'string'
-        nicename = "Script Name"
-        default = ''
-        if lx.eval('query scriptsysservice userValue.isDefined ? %s' % valHandle) == 0:
-            lx.eval('user.defNew %s %s' % (valHandle, valType))
-
-        try:
-            lx.eval('user.def %s username {%s}' % (valHandle, nicename))
-            lx.eval('user.def %s type %s' % (valHandle, valType))
-            lx.eval('user.value %s {%s}' % (valHandle, default))
-            lx.eval('user.value %s' % valHandle)
-            name = lx.eval('user.value %s value:?' % valHandle)
-        except:
-            name = 'script_'+time.strftime('%Y%m%d%H%M%S')
-        #Remove .py and add it back again just in case user
-        #forgets to include it when typing the name.
+        lx.eval('+@sky.quickUserVal.py %s string {%s} %s' % (USER_VAL_HANDLE,USER_VAL_NICENAME,DEFAULT_SCRIPT_NAME))
         name = re.sub('\.py$','',name)
         name = name + '.py'
         
         dest = join(path,name)
-        lx.out('script destination: '+dest)
+        lx.out('script destination: ' + dest)
         
         try:
             lx.eval('select.filepath {%s} set' % proto)
@@ -200,18 +204,17 @@ class projectScriptListerPopup(lxu.command.BasicHints, lxifc.UIValueHints):
             # the same list.
             self._items = [filenames[:],filenames[:]]
             
-            # We add our update and new commands to the bottom of the list.
-            self._items[0].append(NAME_CMD_NEW)
-            self._items[1].append('(new...)')
-            
+#            self._items[0].append(NAME_CMD_NEW)
+#            self._items[1].append(NEW)
+
         else:
             empty = ['']
-            emptyun = ['(unsaved)']
+            emptyun = [UNSAVED]
             self._items = [empty,emptyun]
 
         
         self._items[0].append(NAME_CMD_UPDATE)
-        self._items[1].append('(refresh)')
+        self._items[1].append(REFRESH)
         
  
     def uiv_Flags(self):
