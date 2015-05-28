@@ -2,19 +2,10 @@
 
 import re, os, shutil
 
-kit_path  = lx.eval("query platformservice alias ? {kit_mecco_sky_py:}")
-proto = os.join(kit_path,'assets','snippets','blank.py')
+KIT_PATH  = lx.eval("query platformservice alias ? {kit_mecco_sky_py:}")
+PYTHON_TEMPLATE = os.join(KIT_PATH,'assets','snippets','blank.py')
 
-lx.out('proto: '+proto)
-
-def pathname(string):
-	pathname = re.findall('^.*[\/\\\]',string)
-	try:
-		lx.out('pathname: ' + pathname[0])
-		return pathname[0]
-	except:
-		lx.out('no pathname found')
-		return false
+lx.out('PYTHON_TEMPLATE: ' + PYTHON_TEMPLATE)
 
 if lx.eval("query scriptsysservice userValue.isDefined ? sky_newSnippet")==0:
 	lx.eval( 'user.defNew sky_newSnippet string' )
@@ -31,15 +22,15 @@ try:
 	snippetName = re.sub('\.py','',snippetName)
 	snippetName = snippetName + '.py'
 
-	dest = pathname(proto) + snippetName
+	dest = os.path.dirname(PYTHON_TEMPLATE) + snippetName
 
 	try:
-		lx.eval('select.filepath {%s} set' % proto)
-		lx.out('selected proto '+proto)
+		lx.eval('select.filepath {%s} set' % PYTHON_TEMPLATE)
+		lx.out('selected PYTHON_TEMPLATE ' + PYTHON_TEMPLATE)
 
 		try:
-			shutil.copyfile(proto,dest)
-			lx.out('successfully duplicated \'' + proto + '\' to \'' + dest + '\'')
+			shutil.copyfile(PYTHON_TEMPLATE,dest)
+			lx.out('successfully duplicated \'' + PYTHON_TEMPLATE + '\' to \'' + dest + '\'')
 
 			try:
 				lx.eval('file.open {%s}' % dest)
@@ -47,10 +38,10 @@ try:
 				lx.out('could not open \'' + dest + '\'')
 
 		except:
-			lx.out('could not duplicate prototype:\n \'' + proto + '\' \nto:\n \'' + dest + '\'')
+			lx.out('could not duplicate prototype:\n \'' + PYTHON_TEMPLATE + '\' \nto:\n \'' + dest + '\'')
 		
 	except:
-		lx.out('could  not select proto '+proto)
+		lx.out('could  not select PYTHON_TEMPLATE ' + PYTHON_TEMPLATE)
 	
 except:
 	lx.out('user abort')

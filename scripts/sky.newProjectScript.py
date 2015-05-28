@@ -10,6 +10,8 @@ USER_VAL_HANDLE = "sky.scriptName"
 KIT_PATH  = lx.eval("query platformservice alias ? {kit_mecco_sky_py:}")
 SCRIPT_TEMPLATE = join(KIT_PATH,'assets','snippets','blank.py')
 
+
+
 lx.out('script template: ' + SCRIPT_TEMPLATE)
 
 filepath = lx.eval('query sceneservice scene.file ? current')

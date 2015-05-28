@@ -1,11 +1,6 @@
 #python
 
-import re;
-
-def basename(string):
-    basename = re.sub('^.*[\/\\\]','',string);
-    lx.out('basename: ' + basename);
-    return basename;
+import re, os;
 
 if lx.eval("query scriptsysservice userValue.isDefined ? sky_working")==0:
     lx.eval( 'user.defNew sky_working string' );
@@ -21,10 +16,8 @@ try:
 
     lx.eval('user.value sky_working {%s}' % fileSelection);
     lx.out("Sky_Py: working file set to " + fileSelection);
-    
+
     lx.eval('select.attr {sky_py.58367595996:sheet/0} set');
-    lx.eval('attr.label {run: %s}' % basename(fileSelection));
+    lx.eval('attr.label {run: %s}' % os.path.basename(fileSelection));
 except:
     lx.out("sky.setWorkingFile.py: user aborted");
-
-#lx.eval('user.value sky_working');

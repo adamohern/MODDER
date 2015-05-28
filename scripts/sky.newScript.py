@@ -2,15 +2,10 @@
 
 import re, os, shutil
 
-def basename(string):
-    basename = re.sub('^.*[\/\\\]','',string);
-    lx.out('basename: ' + basename);
-    return basename;
+KIT_PATH  = lx.eval("query platformservice alias ? {kit_mecco_sky_py:}")
+PYTHON_TEMPLATE = os.join(KIT_PATH,'assets','snippets','blank.py')
 
-kit_path  = lx.eval("query platformservice alias ? {kit_mecco_sky_py:}")
-proto = os.join(kit_path,'assets','snippets','blank.py')
-
-lx.out('proto: '+proto)
+lx.out('PYTHON_TEMPLATE: ' + PYTHON_TEMPLATE)
 
 try:
 	lx.eval("dialog.setup fileSave");
@@ -24,22 +19,22 @@ try:
 		lx.out('user abort')
 		sys.exit
 		
-	lx.out('script path: '+scriptPath)
+	lx.out('script path: ' + scriptPath)
 	
 	#Remove .py and add it back again just in case user
 	#forgets to include it when typing the name.
-	scriptPath = re.sub('\.py','',scriptPath)
+	scriptPath = re.sub('\.py', '', scriptPath)
 	scriptPath = scriptPath + '.py'
 
 	dest = scriptPath
 
 	try:
-		lx.eval('select.filepath {%s} set' % proto)
-		lx.out('selected proto '+proto)
+		lx.eval('select.filepath {%s} set' % PYTHON_TEMPLATE)
+		lx.out('selected PYTHON_TEMPLATE ' + PYTHON_TEMPLATE)
 
 		try:
-			shutil.copyfile(proto,dest)
-			lx.out('successfully duplicated \'' + proto + '\' to \'' + dest + '\'')
+			shutil.copyfile(PYTHON_TEMPLATE,dest)
+			lx.out('successfully duplicated \'' + PYTHON_TEMPLATE + '\' to \'' + dest + '\'')
 			
 			try:
 				if lx.eval("query scriptsysservice userValue.isDefined ? sky_working")==0:
@@ -50,7 +45,7 @@ try:
 				lx.out("Sky_Py: working file set to " + scriptPath);
 
 				lx.eval('select.attr {sky_py.58367595996:sheet/0} set');
-				lx.eval('attr.label {run: %s}' % basename(scriptPath));
+				lx.eval('attr.label {run: %s}' % os.path.basename(scriptPath));
 				
 			except:
 				lx.out("sky.newScript.py: user aborted");
@@ -61,10 +56,10 @@ try:
 				lx.out('could not open \'' + dest + '\'')
 
 		except:
-			lx.out('could not duplicate prototype:\n \'' + proto + '\' \nto:\n \'' + dest + '\'')
+			lx.out('could not duplicate prototype:\n \'' + PYTHON_TEMPLATE + '\' \nto:\n \'' + dest + '\'')
 		
 	except:
-		lx.out('could  not select proto '+proto)
+		lx.out('could  not select PYTHON_TEMPLATE ' + PYTHON_TEMPLATE)
 	
 except:
 	lx.out('user abort')
