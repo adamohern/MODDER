@@ -3,7 +3,7 @@
 import re, os, shutil
 
 KIT_PATH  = lx.eval("query platformservice alias ? {kit_mecco_sky_py:}")
-PYTHON_TEMPLATE = os.join(KIT_PATH,'assets','snippets','blank.py')
+PYTHON_TEMPLATE = os.path.join(KIT_PATH,'assets','snippets','blank.py')
 
 lx.out('PYTHON_TEMPLATE: ' + PYTHON_TEMPLATE)
 
