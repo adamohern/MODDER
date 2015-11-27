@@ -1,7 +1,26 @@
 #python
 
-# Get active mesh item (int ID)
-activeMesh = lx.eval('query layerservice layers ? main')
+# Get active mesh item (int)
+activeMeshID = lx.eval('query layerservice layers ? main')
+
+# Get primary mesh item
+def activeLayers():
+  lyr_svc = lx.service.Layer ()
+  scan = lx.object.LayerScan (lyr_svc.ScanAllocate (lx.symbol.f_LAYERSCAN_ACTIVE))
+  if scan.Count () > 0:
+    item = scan.MeshItem (0)
+  scan.Apply ()
+  
+# Get any currently active mesh items
+def mainLayer():
+  lyr_svc = lx.service.Layer ()
+  scan = lx.object.LayerScan (lyr_svc.ScanAllocate (lx.symbol.f_LAYERSCAN_PRIMARY))
+  if scan.Count () > 0:
+    item = scan.MeshItem (0)
+  scan.Apply ()
+
+# Get layer id string from int id (string)
+itemID = lx.eval('query layerservice layer.id ? %s' % activeMeshID)
 
 # Get mesh items (list of IDs)
 layers = lx.eval('query layerservice layers ? all')
