@@ -1,6 +1,6 @@
 #python
 
-import lx, lxu, apidump
+import lx, lxu, komodo.apidump as apidump
 
 BLESS = "komodo.dumpAPI"
 

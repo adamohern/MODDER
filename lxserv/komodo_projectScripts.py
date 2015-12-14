@@ -63,7 +63,7 @@ def bugger(comment=0):
         comment = ": " + comment if comment else ""
         lx.out("line " + str(inspect.currentframe().f_back.f_lineno) + comment)
 
-class SkyListener(lxifc.SceneItemListener, lxifc.SelectionListener):
+class komodoListener(lxifc.SceneItemListener, lxifc.SelectionListener):
     def __init__ (self):
         # We attach the listener.
         self.listenerService = lx.service.Listener()
@@ -73,7 +73,7 @@ class SkyListener(lxifc.SceneItemListener, lxifc.SelectionListener):
         # In case we need to remove it...
         self.listenerService.RemoveListener(self)
     def notify(self):
-        notifier = SkyNotifier()
+        notifier = komodoNotifier()
         notifier.Notify(lx.symbol.fCMDNOTIFY_CHANGE_ALL)
     def sil_SceneCreate(self,scene):
         self.notify()
@@ -141,11 +141,11 @@ class SkyListener(lxifc.SceneItemListener, lxifc.SelectionListener):
 
 # We don't need to bless a listener,
 # we just need to call it once
-SkyListener()
+komodoListener()
 
 # I've no idea what any of this means,
 # but apparently it needs to be there.
-class SkyNotifier(lxifc.Notifier,lxifc.CommandEvent):
+class komodoNotifier(lxifc.Notifier,lxifc.CommandEvent):
     masterList = {}
     def noti_Name(self):
         return NAME_NOTIFIER
@@ -157,19 +157,19 @@ class SkyNotifier(lxifc.Notifier,lxifc.CommandEvent):
         for event in self.masterList:
             evt = lx.object.CommandEvent(self.masterList[event])
             evt.Event(flags)
- 
-lx.bless(SkyNotifier, NAME_NOTIFIER)
+
+lx.bless(komodoNotifier, NAME_NOTIFIER)
 
 
 # Manual update command.
-class cmd_SkyNotify(lxu.command.BasicCommand):
+class cmd_komodoNotify(lxu.command.BasicCommand):
     def __init__(self):
         lxu.command.BasicCommand.__init__(self)
     def basic_Execute(self, msg, flags):
         # We get an instance of the notifier,
         # and then we call its Notify method,
         # telling it to update everything.
-        notifier = SkyNotifier()
+        notifier = komodoNotifier()
         notifier.Notify(lx.symbol.fCMDNOTIFY_CHANGE_ALL)
     def cmd_Flags(self):
         # fCMD_UI since it's a UI command, and fCMD_INTERNAL
@@ -178,7 +178,7 @@ class cmd_SkyNotify(lxu.command.BasicCommand):
     def basic_Enable(self,msg):
         return True
 
-lx.bless(cmd_SkyNotify, NAME_CMD_UPDATE)
+lx.bless(cmd_komodoNotify, NAME_CMD_UPDATE)
 
 
 # The UIValueHints class we'll be using to manage the list and it's items
@@ -299,6 +299,6 @@ class projectScriptListerCmd(lxu.command.BasicCommand):
         # We don't actually need to return anything from the query
         # It just needs to be queryable to create the UI...
         return lx.result.OK
- 
+
 # bless() the command to register it as a plugin
 lx.bless(projectScriptListerCmd, NAME_CMD_SCRIPTLISTER)
