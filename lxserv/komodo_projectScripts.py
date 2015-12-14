@@ -44,10 +44,10 @@ svc_sel = lx.service.Selection()
 svc_scn = lx.service.Scene()
 
 """ Names """
-NAME_NOTIFIER = 'sky.notifier'
-NAME_CMD_UPDATE = 'sky.update'
-NAME_CMD_NEW = '+@sky.newProjectScript.py'
-NAME_CMD_SCRIPTLISTER = 'sky.projectScriptLister'
+NAME_NOTIFIER = 'komodo.notifier'
+NAME_CMD_UPDATE = 'komodo.update'
+NAME_CMD_NEW = '+@komodo.newProjectScript.py'
+NAME_CMD_SCRIPTLISTER = 'komodo.projectScriptLister'
 
 """ Symbols """
 fCMDARG_OPTIONAL = lx.symbol.fCMDARG_OPTIONAL

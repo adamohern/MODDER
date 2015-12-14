@@ -79,7 +79,7 @@ class snippetsPopupCmd(lxu.command.BasicCommand):
 	def arg_UIValueHints(self, index):
 		# create an instance of our pop-up list object passing it the
 		# list of commands.
-		kit_path  = lx.eval("query platformservice alias ? {kit_mecco_sky_py:}")
+		kit_path  = lx.eval("query platformservice alias ? {kit_KOMODO:}")
 		snippets_path = join(kit_path,'assets','snippets')
 		if index == 0:
 			return snippetsPopup(snippets_path)
@@ -92,7 +92,7 @@ class snippetsPopupCmd(lxu.command.BasicCommand):
 		# we'd want to be using persistent storage but for simplicity in this
 		# example we'll use a UserValue.
 		if self.dyna_IsSet(0):
-			lx.eval('file.open {kit_mecco_sky_py:assets/snippets/%s}' % self.dyna_String(0))
+			lx.eval('file.open {kit_KOMODO:assets/snippets/%s}' % self.dyna_String(0))
  
 	def cmd_Query(self,index,vaQuery):
 		# In the query method we need to retrieve the value we stored in the execute
@@ -106,4 +106,4 @@ class snippetsPopupCmd(lxu.command.BasicCommand):
 		return lx.result.OK
  
 # bless() the command to register it as a plugin
-lx.bless(snippetsPopupCmd, "sky.snippetsPopup")
+lx.bless(snippetsPopupCmd, "komodo.snippetsPopup")

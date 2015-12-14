@@ -2,7 +2,7 @@
 
 import lx, lxu
 
-NAME_CMD = "symbolsearch"
+NAME_CMD = "komodo.symbolsearch"
 
 class CMD_DUI(lxu.command.BasicCommand):
   
@@ -21,8 +21,6 @@ class CMD_DUI(lxu.command.BasicCommand):
         text.lower() in v.lower()
       )]
     for r in results:
-      lx.out('%s\n%s' % (r[1],r[0]))
+        lx.out('%s\n%s' % (r[1],r[0]))
 
-        
-      
 lx.bless(CMD_DUI, NAME_CMD)

@@ -2,7 +2,7 @@
 
 import re, os, shutil
 
-KIT_PATH = lx.eval("query platformservice alias ? {kit_mecco_sky_py:}")
+KIT_PATH = lx.eval("query platformservice alias ? {kit_KOMODO:}")
 PYTHON_TEMPLATE = os.path.join(KIT_PATH, 'assets', 'snippets', 'blank.py')
 
 lx.out('PYTHON_TEMPLATE: ' + PYTHON_TEMPLATE)
@@ -37,18 +37,18 @@ try:
 			lx.out('successfully duplicated \'' + PYTHON_TEMPLATE + '\' to \'' + dest + '\'')
 			
 			try:
-				if lx.eval("query scriptsysservice userValue.isDefined ? sky_working")==0:
-					lx.eval( 'user.defNew sky_working string' );
-					lx.eval( 'user.def sky_working username value:{}' );
+				if lx.eval("query scriptsysservice userValue.isDefined ? komodo_working")==0:
+					lx.eval( 'user.defNew komodo_working string' );
+					lx.eval( 'user.def komodo_working username value:{}' );
 				
-				lx.eval('user.value sky_working {%s}' % scriptPath);
+				lx.eval('user.value komodo_working {%s}' % scriptPath);
 				lx.out("Sky_Py: working file set to " + scriptPath);
 
-				lx.eval('select.attr {sky_py.58367595996:sheet/0} set');
+				lx.eval('select.attr {komodo.58367595996:sheet/0} set');
 				lx.eval('attr.label {run: %s}' % os.path.basename(scriptPath));
 				
 			except:
-				lx.out("sky.newScript.py: user aborted");
+				lx.out("komodo.newScript.py: user aborted");
 			
 			try:
 				lx.eval('file.open {%s}' % dest)

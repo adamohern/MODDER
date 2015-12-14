@@ -2,7 +2,7 @@
 
 import lx
 
-def userValue(valHandle='sky_tmp',valType='string',nicename='String',default=''):
+def userValue(valHandle='komodo_tmp',valType='string',nicename='String',default=''):
     if lx.eval('query scriptsysservice userValue.isDefined ? %s' % valHandle) == 0:
         lx.eval('user.defNew %s %s' % (valHandle, valType))
     try:

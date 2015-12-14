@@ -2,19 +2,19 @@
 
 import re, os, shutil
 
-KIT_PATH  = lx.eval("query platformservice alias ? {kit_mecco_sky_py:}")
+KIT_PATH  = lx.eval("query platformservice alias ? {kit_KOMODO:}")
 PYTHON_TEMPLATE = os.path.join(KIT_PATH,'assets','snippets','blank.py')
 
 lx.out('PYTHON_TEMPLATE: ' + PYTHON_TEMPLATE)
 
-if lx.eval("query scriptsysservice userValue.isDefined ? sky_newSnippet")==0:
-	lx.eval( 'user.defNew sky_newSnippet string' )
-	lx.eval( 'user.def sky_newSnippet username value:{}' )
+if lx.eval("query scriptsysservice userValue.isDefined ? komodo_newSnippet")==0:
+	lx.eval( 'user.defNew komodo_newSnippet string' )
+	lx.eval( 'user.def komodo_newSnippet username value:{}' )
 
 try:
-	lx.eval('user.value sky_newSnippet value:{}')
-	lx.eval('user.value sky_newSnippet')
-	snippetName = lx.eval('user.value sky_newSnippet value:?')
+	lx.eval('user.value komodo_newSnippet value:{}')
+	lx.eval('user.value komodo_newSnippet')
+	snippetName = lx.eval('user.value komodo_newSnippet value:?')
 	lx.out('filename: ' + snippetName)
 
 	#Remove .py and add it back again just in case user
