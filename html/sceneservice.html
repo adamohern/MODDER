@@ -1,0 +1,906 @@
+<html>
+<body>
+<head><link rel="stylesheet" type="text/css" href="reset.css"><link rel="stylesheet" type="text/css" href="style.css"></head><h1>sceneservice:</h1>
+
+<p><em>query sceneservice "" ?</em></p><ul>
+<li>scene</li>
+<li>types</li>
+<li>isType</li>
+<li>selection</li>
+<li>tags</li>
+<li>pureLocators</li>
+<li>graph</li>
+<li>fwdLink</li>
+<li>revLink</li>
+<li>actionItem</li>
+<li>cinema</li>
+<li>channel</li>
+<li>key</li>
+<li>item</li>
+<li>light</li>
+<li>clip</li>
+<li>locator</li>
+<li>txLayer</li>
+<li>deformer</li>
+<li>group</li>
+<li>pass</li>
+<li>actor</li>
+<li>proxy</li>
+</ul>
+
+
+<h2>attributes:</h2>
+
+<ul>
+	<li><strong>scene</strong><br />
+<span class="light">query sceneservice scene ?</span>
+		<ul>
+			<li>scene.N</li>
+
+			<li>scene.name</li>
+
+			<li>scene.file</li>
+
+			<li>scene.format</li>
+
+			<li>scene.changed</li>
+
+			<li>scene.index</li>
+
+		</ul>
+	</li>
+</ul>
+
+
+
+<ul>
+	<li><strong>types</strong><br />
+<span class="light">query sceneservice types ?</span>
+		<ul>
+			<li>locator</li>
+
+			<li>mesh</li>
+
+			<li>light</li>
+
+			<li>camera</li>
+
+			<li>render</li>
+
+			<li>environment</li>
+
+			<li>textureLayer</li>
+
+			<li>transform</li>
+
+			<li>translation</li>
+
+			<li>rotation</li>
+
+			<li>xfrmcore</li>
+
+			<li>shader</li>
+
+			<li>scene</li>
+
+			<li>shaderFolder</li>
+
+			<li>advancedMaterial</li>
+
+			<li>defaultShader</li>
+
+			<li>renderOutput</li>
+
+			<li>polyRender</li>
+
+			<li>lightMaterial</li>
+
+			<li>envMaterial</li>
+
+			<li>sunLight</li>
+
+		</ul>
+	</li>
+</ul>
+
+
+
+<ul>
+</ul>
+
+
+
+<ul>
+</ul>
+
+
+
+<ul>
+	<li><strong>tags</strong><br />
+<span class="light">query sceneservice tags ?</span>
+		<ul>
+			<li>tags.N</li>
+
+			<li>tags.list</li>
+
+			<li>tags.type</li>
+
+		</ul>
+	</li>
+</ul>
+
+
+
+<ul>
+</ul>
+
+
+
+<ul>
+	<li><strong>graph</strong><br />
+<span class="light">query sceneservice graph ?</span>
+		<ul>
+			<li>graph.N</li>
+
+			<li>graph.name</li>
+
+			<li>graph.type</li>
+
+			<li>graph.flags</li>
+
+		</ul>
+	</li>
+</ul>
+
+
+
+<ul>
+	<li><strong>fwdLink</strong><br />
+<span class="light">query sceneservice fwdLink ?</span>
+		<ul>
+			<li>fwdLink.N</li>
+
+			<li>fwdLink.item</li>
+
+			<li>fwdLink.channel</li>
+
+		</ul>
+	</li>
+</ul>
+
+
+
+<ul>
+	<li><strong>revLink</strong><br />
+<span class="light">query sceneservice revLink ?</span>
+		<ul>
+			<li>revLink.N</li>
+
+			<li>revLink.item</li>
+
+			<li>revLink.channel</li>
+
+		</ul>
+	</li>
+</ul>
+
+
+
+<ul>
+</ul>
+
+
+
+<ul>
+	<li><strong>cinema</strong><br />
+<span class="light">query sceneservice cinema ?</span>
+		<ul>
+			<li>cinema.N</li>
+
+			<li>cinema.name</li>
+
+			<li>cinema.file</li>
+
+			<li>cinema.format</li>
+
+			<li>cinema.changed</li>
+
+			<li>cinema.index</li>
+
+			<li>cinema.type</li>
+
+			<li>cinema.parent</li>
+
+			<li>cinema.numChildren</li>
+
+			<li>cinema.children</li>
+
+		</ul>
+	</li>
+</ul>
+
+
+
+<ul>
+	<li><strong>channel</strong><br />
+<span class="light">query sceneservice channel ?</span>
+		<ul>
+			<li>channel.N</li>
+
+			<li>channel.name</li>
+
+			<li>channel.value</li>
+
+			<li>channel.eval</li>
+
+			<li>channel.type</li>
+
+			<li>channel.vecMode</li>
+
+			<li>channel.label</li>
+
+			<li>channel.keys</li>
+
+			<li>channel.keyValues</li>
+
+			<li>channel.keyTimes</li>
+
+			<li>channel.isSelected</li>
+
+			<li>channel.selection</li>
+
+			<li>channel.isInternal</li>
+
+			<li>channel.index</li>
+
+			<li>channel.subType</li>
+
+			<li>channel.isCustom</li>
+
+		</ul>
+	</li>
+</ul>
+
+
+
+<ul>
+	<li><strong>key</strong><br />
+<span class="light">query sceneservice key ?</span>
+		<ul>
+			<li>key.N</li>
+
+			<li>key.time</li>
+
+			<li>key.value</li>
+
+			<li>key.type</li>
+
+			<li>key.index</li>
+
+			<li>key.slope</li>
+
+			<li>key.weight</li>
+
+			<li>key.slopeType</li>
+
+			<li>key.weightType</li>
+
+			<li>key.isSelected</li>
+
+			<li>key.weighType</li>
+
+			<li>key.slopeTypeName</li>
+
+		</ul>
+	</li>
+</ul>
+
+
+
+<ul>
+	<li><strong>item</strong><br />
+<span class="light">query sceneservice item ?</span>
+		<ul>
+			<li>item.N</li>
+
+			<li>item.name</li>
+
+			<li>item.type</li>
+
+			<li>item.typeLabel</li>
+
+			<li>item.types</li>
+
+			<li>item.id</li>
+
+			<li>item.parent</li>
+
+			<li>item.numChildren</li>
+
+			<li>item.children</li>
+
+			<li>item.tags</li>
+
+			<li>item.tagTypes</li>
+
+			<li>item.source</li>
+
+			<li>item.isSelected</li>
+
+			<li>item.rotOrder</li>
+
+			<li>item.pos</li>
+
+			<li>item.rot</li>
+
+			<li>item.scale</li>
+
+			<li>item.matrix</li>
+
+			<li>item.matrixInvrs</li>
+
+			<li>item.pivPos</li>
+
+			<li>item.pivRot</li>
+
+			<li>item.worldMatrix</li>
+
+			<li>item.worldMatrixInvrs</li>
+
+			<li>item.xfrmItems</li>
+
+			<li>item.xfrmPos</li>
+
+			<li>item.xfrmRot</li>
+
+			<li>item.xfrmScl</li>
+
+			<li>item.xfrmPiv</li>
+
+			<li>item.xfrmPivC</li>
+
+			<li>item.fullName</li>
+
+			<li>item.worldPos</li>
+
+			<li>item.worldRot</li>
+
+			<li>item.refItem</li>
+
+			<li>item.refPath</li>
+
+			<li>item.rootIndex</li>
+
+			<li>item.worldScl</li>
+
+			<li>item.bounds</li>
+
+			<li>item.isDeformer</li>
+
+			<li>item.deformers</li>
+
+			<li>item.groups</li>
+
+			<li>item.defItem</li>
+
+			<li>item.meshes</li>
+
+			<li>item.flags</li>
+
+			<li>item.defParent</li>
+
+			<li>item.inGroup</li>
+
+			<li>item.current</li>
+
+			<li>item.isCurrent</li>
+
+			<li>item.itemMembers</li>
+
+			<li>item.chanMembers</li>
+
+			<li>item.scene</li>
+
+			<li>item.render</li>
+
+			<li>item.preview</li>
+
+			<li>item.bounds</li>
+
+		</ul>
+	</li>
+</ul>
+
+
+
+<ul>
+	<li><strong>light</strong><br />
+<span class="light">query sceneservice light ?</span>
+		<ul>
+			<li>light.N</li>
+
+			<li>light.name</li>
+
+			<li>light.type</li>
+
+			<li>light.typeLabel</li>
+
+			<li>light.types</li>
+
+			<li>light.id</li>
+
+			<li>light.parent</li>
+
+			<li>light.numChildren</li>
+
+			<li>light.children</li>
+
+			<li>light.tags</li>
+
+			<li>light.tagTypes</li>
+
+			<li>light.source</li>
+
+			<li>light.isSelected</li>
+
+			<li>light.rotOrder</li>
+
+			<li>light.pos</li>
+
+			<li>light.rot</li>
+
+			<li>light.scale</li>
+
+			<li>light.matrix</li>
+
+			<li>light.matrixInvrs</li>
+
+			<li>light.pivPos</li>
+
+			<li>light.pivRot</li>
+
+			<li>light.worldMatrix</li>
+
+			<li>light.worldMatrixInvrs</li>
+
+			<li>light.xfrmItems</li>
+
+			<li>light.xfrmPos</li>
+
+			<li>light.xfrmRot</li>
+
+			<li>light.xfrmScl</li>
+
+			<li>light.xfrmPiv</li>
+
+			<li>light.xfrmPivC</li>
+
+			<li>light.fullName</li>
+
+			<li>light.worldPos</li>
+
+			<li>light.worldRot</li>
+
+			<li>light.refItem</li>
+
+			<li>light.refPath</li>
+
+			<li>light.rootIndex</li>
+
+			<li>light.worldScl</li>
+
+			<li>light.bounds</li>
+
+			<li>light.isDeformer</li>
+
+			<li>light.deformers</li>
+
+			<li>light.groups</li>
+
+			<li>light.defItem</li>
+
+			<li>light.meshes</li>
+
+			<li>light.flags</li>
+
+			<li>light.defParent</li>
+
+			<li>light.inGroup</li>
+
+			<li>light.current</li>
+
+			<li>light.isCurrent</li>
+
+			<li>light.itemMembers</li>
+
+			<li>light.chanMembers</li>
+
+			<li>light.scene</li>
+
+			<li>light.render</li>
+
+			<li>light.preview</li>
+
+			<li>light.bounds</li>
+
+		</ul>
+	</li>
+</ul>
+
+
+
+<ul>
+	<li><strong>clip</strong><br />
+<span class="light">query sceneservice clip ?</span>
+		<ul>
+			<li>clip.N</li>
+
+			<li>clip.name</li>
+
+			<li>clip.type</li>
+
+			<li>clip.typeLabel</li>
+
+			<li>clip.types</li>
+
+			<li>clip.id</li>
+
+			<li>clip.parent</li>
+
+			<li>clip.numChildren</li>
+
+			<li>clip.children</li>
+
+			<li>clip.tags</li>
+
+			<li>clip.tagTypes</li>
+
+			<li>clip.source</li>
+
+			<li>clip.isSelected</li>
+
+			<li>clip.rotOrder</li>
+
+			<li>clip.pos</li>
+
+			<li>clip.rot</li>
+
+			<li>clip.scale</li>
+
+			<li>clip.matrix</li>
+
+			<li>clip.matrixInvrs</li>
+
+			<li>clip.pivPos</li>
+
+			<li>clip.pivRot</li>
+
+			<li>clip.worldMatrix</li>
+
+			<li>clip.worldMatrixInvrs</li>
+
+			<li>clip.xfrmItems</li>
+
+			<li>clip.xfrmPos</li>
+
+			<li>clip.xfrmRot</li>
+
+			<li>clip.xfrmScl</li>
+
+			<li>clip.xfrmPiv</li>
+
+			<li>clip.xfrmPivC</li>
+
+			<li>clip.fullName</li>
+
+			<li>clip.worldPos</li>
+
+			<li>clip.worldRot</li>
+
+			<li>clip.refItem</li>
+
+			<li>clip.refPath</li>
+
+			<li>clip.rootIndex</li>
+
+			<li>clip.worldScl</li>
+
+			<li>clip.bounds</li>
+
+			<li>clip.isDeformer</li>
+
+			<li>clip.deformers</li>
+
+			<li>clip.groups</li>
+
+			<li>clip.defItem</li>
+
+			<li>clip.meshes</li>
+
+			<li>clip.flags</li>
+
+			<li>clip.defParent</li>
+
+			<li>clip.inGroup</li>
+
+			<li>clip.current</li>
+
+			<li>clip.isCurrent</li>
+
+			<li>clip.itemMembers</li>
+
+			<li>clip.chanMembers</li>
+
+			<li>clip.scene</li>
+
+			<li>clip.render</li>
+
+			<li>clip.preview</li>
+
+			<li>clip.bounds</li>
+
+		</ul>
+	</li>
+</ul>
+
+
+
+<ul>
+	<li><strong>locator</strong><br />
+<span class="light">query sceneservice locator ?</span>
+		<ul>
+			<li>locator.N</li>
+
+			<li>locator.name</li>
+
+			<li>locator.type</li>
+
+			<li>locator.typeLabel</li>
+
+			<li>locator.types</li>
+
+			<li>locator.id</li>
+
+			<li>locator.parent</li>
+
+			<li>locator.numChildren</li>
+
+			<li>locator.children</li>
+
+			<li>locator.tags</li>
+
+			<li>locator.tagTypes</li>
+
+			<li>locator.source</li>
+
+			<li>locator.isSelected</li>
+
+			<li>locator.rotOrder</li>
+
+			<li>locator.pos</li>
+
+			<li>locator.rot</li>
+
+			<li>locator.scale</li>
+
+			<li>locator.matrix</li>
+
+			<li>locator.matrixInvrs</li>
+
+			<li>locator.pivPos</li>
+
+			<li>locator.pivRot</li>
+
+			<li>locator.worldMatrix</li>
+
+			<li>locator.worldMatrixInvrs</li>
+
+			<li>locator.xfrmItems</li>
+
+			<li>locator.xfrmPos</li>
+
+			<li>locator.xfrmRot</li>
+
+			<li>locator.xfrmScl</li>
+
+			<li>locator.xfrmPiv</li>
+
+			<li>locator.xfrmPivC</li>
+
+			<li>locator.fullName</li>
+
+			<li>locator.worldPos</li>
+
+			<li>locator.worldRot</li>
+
+			<li>locator.refItem</li>
+
+			<li>locator.refPath</li>
+
+			<li>locator.rootIndex</li>
+
+			<li>locator.worldScl</li>
+
+			<li>locator.bounds</li>
+
+			<li>locator.isDeformer</li>
+
+			<li>locator.deformers</li>
+
+			<li>locator.groups</li>
+
+			<li>locator.defItem</li>
+
+			<li>locator.meshes</li>
+
+			<li>locator.flags</li>
+
+			<li>locator.defParent</li>
+
+			<li>locator.inGroup</li>
+
+			<li>locator.current</li>
+
+			<li>locator.isCurrent</li>
+
+			<li>locator.itemMembers</li>
+
+			<li>locator.chanMembers</li>
+
+			<li>locator.scene</li>
+
+			<li>locator.render</li>
+
+			<li>locator.preview</li>
+
+			<li>locator.bounds</li>
+
+		</ul>
+	</li>
+</ul>
+
+
+
+<ul>
+	<li><strong>txLayer</strong><br />
+<span class="light">query sceneservice txLayer ?</span>
+		<ul>
+			<li>txLayer.N</li>
+
+			<li>txLayer.name</li>
+
+			<li>txLayer.type</li>
+
+			<li>txLayer.typeLabel</li>
+
+			<li>txLayer.types</li>
+
+			<li>txLayer.id</li>
+
+			<li>txLayer.parent</li>
+
+			<li>txLayer.numChildren</li>
+
+			<li>txLayer.children</li>
+
+			<li>txLayer.tags</li>
+
+			<li>txLayer.tagTypes</li>
+
+			<li>txLayer.source</li>
+
+			<li>txLayer.isSelected</li>
+
+			<li>txLayer.rotOrder</li>
+
+			<li>txLayer.pos</li>
+
+			<li>txLayer.rot</li>
+
+			<li>txLayer.scale</li>
+
+			<li>txLayer.matrix</li>
+
+			<li>txLayer.matrixInvrs</li>
+
+			<li>txLayer.pivPos</li>
+
+			<li>txLayer.pivRot</li>
+
+			<li>txLayer.worldMatrix</li>
+
+			<li>txLayer.worldMatrixInvrs</li>
+
+			<li>txLayer.xfrmItems</li>
+
+			<li>txLayer.xfrmPos</li>
+
+			<li>txLayer.xfrmRot</li>
+
+			<li>txLayer.xfrmScl</li>
+
+			<li>txLayer.xfrmPiv</li>
+
+			<li>txLayer.xfrmPivC</li>
+
+			<li>txLayer.fullName</li>
+
+			<li>txLayer.worldPos</li>
+
+			<li>txLayer.worldRot</li>
+
+			<li>txLayer.refItem</li>
+
+			<li>txLayer.refPath</li>
+
+			<li>txLayer.rootIndex</li>
+
+			<li>txLayer.worldScl</li>
+
+			<li>txLayer.bounds</li>
+
+			<li>txLayer.isDeformer</li>
+
+			<li>txLayer.deformers</li>
+
+			<li>txLayer.groups</li>
+
+			<li>txLayer.defItem</li>
+
+			<li>txLayer.meshes</li>
+
+			<li>txLayer.flags</li>
+
+			<li>txLayer.defParent</li>
+
+			<li>txLayer.inGroup</li>
+
+			<li>txLayer.current</li>
+
+			<li>txLayer.isCurrent</li>
+
+			<li>txLayer.itemMembers</li>
+
+			<li>txLayer.chanMembers</li>
+
+			<li>txLayer.scene</li>
+
+			<li>txLayer.render</li>
+
+			<li>txLayer.preview</li>
+
+			<li>txLayer.bounds</li>
+
+		</ul>
+	</li>
+</ul>
+
+
+
+<ul>
+</ul>
+
+
+
+<ul>
+</ul>
+
+
+
+<ul>
+</ul>
+
+
+
+<ul>
+</ul>
+
+
+
+<ul>
+</ul>
+
+
+
+</body>
+</html>

@@ -7,7 +7,7 @@ import os.path
 def layerserviceRef():
 
     text = '<html>\n<body>\n'
-    text += '<head><link rel="stylesheet" type="text/css" href="style.css"></head>'
+    text += '<head><link rel="stylesheet" type="text/css" href="reset.css"><link rel="stylesheet" type="text/css" href="style.css"></head>'
 
     attributesArray = lx.eval('query layerservice "" ?')
 
@@ -21,7 +21,7 @@ def layerserviceRef():
 
     text += '</body>\n</html>'
             
-    kit_path  = lx.eval("query platformservice alias ? {kit_mecco_apidump:}")
+    kit_path  = lx.eval("query platformservice alias ? {kit_KOMODO:}")
     f = open(os.path.join(kit_path,'html','layerservice.html'),'w')
     fpath = os.path.abspath(f.name)
     

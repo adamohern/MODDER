@@ -2,7 +2,7 @@
 
 import lx, lxu, lxifc, modo, inspect, os, sys, re, commandservice, layerservice, sceneservice, imagesavers, symbols
 
-DUMP_PATH = lx.eval("query platformservice alias ? {kit_mecco_apidump:html}")
+DUMP_PATH = lx.eval("query platformservice alias ? {kit_KOMODO:html}")
 SCRATCH = "scratch.html"
 MAX = 10
 NL = "\n"
@@ -148,6 +148,11 @@ def dive(context,name,d=0,pre=""):
     
 
 def dump():
+    try:
+        os.makedirs(DUMP_PATH)
+    except:
+        pass
+    
     for module in DUMP:
         html = '<html>' + n()
         html += '<head>' + n()
@@ -176,4 +181,4 @@ def dump():
     reload(symbols)
     symbols.symbolDump(DUMP_PATH)
     
-    lx.eval('python.dumpAPI {%s}' % DUMP_PATH)
+    lx.eval('python.dumpAPI {%s}' % os.path.join(DUMP_PATH,"dummy"))

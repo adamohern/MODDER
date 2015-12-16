@@ -1,3 +1,6 @@
 #python
 
-import apidump, util
+try:
+    import apidump, util, layers, selection
+except:
+    traceback.print_exc()

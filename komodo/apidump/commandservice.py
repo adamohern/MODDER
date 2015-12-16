@@ -4,7 +4,7 @@ import re, lx, os.path, gc
 
 def commandserviceRef():
     
-    kit_path    = lx.eval("query platformservice alias ? {kit_mecco_apidump:}")
+    kit_path    = lx.eval("query platformservice alias ? {kit_KOMODO:}")
     
 
     text = '<html>\n<body>\n'

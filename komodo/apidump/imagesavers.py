@@ -2,16 +2,23 @@
 
 import lx, os
 
-def imagesaversRef(path,filename="imagesavers",ext="txt"):
+def imagesaversRef(path,filename="imagesavers",ext="html"):
     fullpath = os.path.join(path,".".join([filename,ext]))
     target = open(fullpath,'w')
-    target.write("Image savers: \n\n")
+    target.write("<html>")
     target.close()
     
     target = open(fullpath,'a')
     savers = get_imagesavers()
+    target.write("<head>\n")
+    target.write('<link rel="stylesheet" type="text/css" href="reset.css">'+"\n")
+    target.write('<link rel="stylesheet" type="text/css" href="style.css">'+"\n")
+    target.write('</head>'+"\n")
+    target.write('<body>'+"\n")
+    target.write("<ul>\n")
     for saver in savers:
-        target.write("%s: %s (.%s)\n" % (saver[1],saver[0],saver[2]))
+        target.write("\t<li><strong>%s:</strong> %s (.%s)</li>\n" % (saver[0],saver[1],saver[2]))
+    target.write("</ul>\n</body>\n</html>")
     target.close()
 
 def get_imagesavers():

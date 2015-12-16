@@ -7,7 +7,7 @@ import os.path
 def sceneserviceRef():
 
     text = '<html>\n<body>\n'
-    text += '<head><link rel="stylesheet" type="text/css" href="style.css"></head>'
+    text += '<head><link rel="stylesheet" type="text/css" href="reset.css"><link rel="stylesheet" type="text/css" href="style.css"></head>'
 
     attributesArray = lx.eval('query sceneservice "" ?')
 
@@ -55,7 +55,7 @@ def sceneserviceRef():
 
     text += '</body>\n</html>'
             
-    kit_path  = lx.eval("query platformservice alias ? {kit_mecco_apidump:}")
+    kit_path  = lx.eval("query platformservice alias ? {kit_KOMODO:}")
     f = open(os.path.join(kit_path,'html','sceneservice.html'),'w')
     fpath = os.path.abspath(f.name)
     
