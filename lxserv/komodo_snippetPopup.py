@@ -104,6 +104,6 @@ class snippetsPopupCmd(lxu.command.BasicCommand):
 			# retrieve the value we stored earlier and add it to the ValueArray
 			va.AddString(self.dyna_String(0))
 		return lx.result.OK
- 
+
 # bless() the command to register it as a plugin
 lx.bless(snippetsPopupCmd, "komodo.snippetsPopup")
