@@ -6,6 +6,18 @@ def exists():
     """
     By Adam O'Hern
     Returns True if a script editor currently exists.
+    
+    NOTE: As of 902 build 100509, a bug exists that keeps a script editor 
+    from being recognized by lx.current_scripteditor until it has been initialized
+    by the Run command (ctrl+enter). Once the editor has been run, the following code
+    works fine.
+    
+    "If you want to hot-fix it yourself now, 
+    add "lx.current_scripteditor = scriptEditor" in extra\scripts\lxserv\lxscripteditor.py line 69 
+    after it is initialized. (also delete the corresponding lxscripteditor.pyc file to ensure the change manifests)."
+    -Ivo
+    
+    This should be fixed in future versions.
     """
     try:
         se = lx.current_scripteditor
