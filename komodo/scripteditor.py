@@ -4,6 +4,17 @@ import lx
 
 se = lx.current_scripteditor
 
+def exists():
+    """
+    By Adam O'Hern
+    Returns True if a script editor currently exists.
+    """
+    try:
+        se._editor._input.toPlainText()
+        return True
+    except:
+        return False
+
 def clear_output():
     """
     By Ivo Grigull @ The Foundry
