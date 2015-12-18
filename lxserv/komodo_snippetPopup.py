@@ -24,7 +24,7 @@ import komodo
 from os import walk
 from os.path import join
 
-import re
+import re, sys
 
  
 # The UIValueHints class we'll be using to manage the list and it's items
@@ -98,17 +98,23 @@ class snippetsPopupCmd(lxu.command.BasicCommand):
         if self.dyna_IsSet(0):
             if self.dyna_IsSet(1) and self.dyna_String(1) == 'scripteditor':
                 if komodo.scripteditor.exists():
+                    
                     komodo.scripteditor.clear_output()
-                    
+
                     path = join(komodo.path.expand_alias('kit_KOMODO:'),'assets','snippets',self.dyna_String(0))
+                    komodo.scripteditor.append_output('loading %s' % path)
+
                     try:
-                        
+
                         with open(path, 'r') as script_file:
-                            komodo.scripteditor.set_script(script_file.read())
-                    
+                            komodo.scripteditor.insert_script(re.sub('^#.*python\n*','',script_file.read()))
+
                     except:
-                        lx.out('File could not be opened.')
-                    
+                        komodo.scripteditor.append_output('File could not be opened.')
+                        
+                else:
+                    lx.out('No script editor available.')
+
             else:
                 lx.eval('file.open {kit_KOMODO:assets/snippets/%s}' % self.dyna_String(0))
             

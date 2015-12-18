@@ -2,14 +2,13 @@
 
 import lx
 
-se = lx.current_scripteditor
-
 def exists():
     """
     By Adam O'Hern
     Returns True if a script editor currently exists.
     """
     try:
+        se = lx.current_scripteditor
         se._editor._input.toPlainText()
         return True
     except:
@@ -21,6 +20,7 @@ def clear_output():
     Clear the history pane
     """
     try:
+        se = lx.current_scripteditor
         se._output.clear()
         return True
     except:
@@ -32,6 +32,7 @@ def append_output(string):
     Write to the history output
     """
     try:
+        se = lx.current_scripteditor
         se._output.updateOutput('%s\n' % string)
         return True
     except:
@@ -43,7 +44,20 @@ def clear_script():
     Clear the script editor and history panes
     """
     try:
+        se = lx.current_scripteditor
         se._editor._input.insertPlainText('')
+        return True
+    except:
+        return False
+    
+def insert_script(string):
+    """
+    By Ivo Grigull @ The Foundry
+    Clear the script editor and history panes
+    """
+    try:
+        se = lx.current_scripteditor
+        se._editor._input.insertPlainText('%s\n' % string)
         return True
     except:
         return False
@@ -54,6 +68,8 @@ def set_script(string):
     Clear the script editor and history panes
     """
     try:
+        se = lx.current_scripteditor
+        se._editor._input.clear()
         se._editor._input.insertPlainText('%s\n' % string)
         return True
     except:
@@ -65,6 +81,7 @@ def get_script():
     Get the current contents of the script editor
     """
     try:
+        se = lx.current_scripteditor
         return se._editor._input.toPlainText()
     except:
         return False
