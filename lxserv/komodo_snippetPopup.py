@@ -26,11 +26,14 @@ from os.path import join
 
 import re, sys
 
+NEW = "New Snippet..."
+DIV = "--"
  
 # The UIValueHints class we'll be using to manage the list and it's items
 class snippetsPopup(lxifc.UIValueHints):
     def __init__(self, snippets_path):
-        snippets = []
+        snippets = [NEW,DIV]
+        
         for (dirpath, dirnames, filenames) in walk(snippets_path):
             snippets.extend(filenames)
 
@@ -96,9 +99,13 @@ class snippetsPopupCmd(lxu.command.BasicCommand):
         # we'd want to be using persistent storage but for simplicity in this
         # example we'll use a UserValue.
         if self.dyna_IsSet(0):
-            if self.dyna_IsSet(1) and self.dyna_String(1) == 'scripteditor':
+            if self.dyna_String(0) == NEW:
+                lx.eval('@komodo.newSnippet.py')
+            elif self.dyna_String(0) == DIV:
+                pass
+            elif self.dyna_IsSet(1) and self.dyna_String(1) == 'scripteditor':
+                
                 if komodo.scripteditor.exists():
-                    
                     komodo.scripteditor.clear_output()
 
                     path = join(komodo.path.expand_alias('kit_KOMODO:'),'assets','snippets',self.dyna_String(0))
