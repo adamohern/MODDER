@@ -13,10 +13,7 @@ def mode():
             return mode
     return False
 
-import modo, lx, re
-
-
-def poly_expand_by_ptag(i_POLYTAG = lx.symbol.i_POLYTAG_MATERIAL)
+def poly_expand_by_ptag(i_POLYTAG=lx.symbol.i_POLYTAG_MATERIAL):
     """Expands a polygon selection to include all polys with matching tags in currently active layer(s).
     Useful for expanding a selection to include all polys with a given material or part tag, for example.
     """
