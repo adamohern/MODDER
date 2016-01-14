@@ -1,6 +1,6 @@
 #python
 
-import lx, lxu, lxifc, modo, inspect, os, sys, re, commandservice, layerservice, sceneservice, imagesavers, symbols
+import lx, lxu, lxifc, modo, inspect, os, sys, re, commandservice, layerservice, sceneservice, imagesavers, symbols, savers_and_loaders
 
 DUMP_PATH = lx.eval("query platformservice alias ? {kit_KOMODO:html}")
 SCRATCH = "scratch.html"
@@ -177,6 +177,9 @@ def dump():
     
     reload(imagesavers)
     imagesavers.imagesaversRef(DUMP_PATH)
+    
+    reload(imagesavers)
+    savers_and_loaders.savers_and_loaders_dump(DUMP_PATH)
     
     reload(symbols)
     symbols.symbolDump(DUMP_PATH)
