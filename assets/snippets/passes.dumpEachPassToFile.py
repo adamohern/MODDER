@@ -2,17 +2,16 @@ import modo, os.path
 
 group = modo.Scene().item('shots')
 
+originalOutputPath = output.channel('filename').get()
+modo.Scene().renderItem.channel('outPat').set('_<output>_<FFFF>')
+
 for action in [i for i in group.itemGraph('itemGroups').forward() if i.type == lx.symbol.a_ACTIONCLIP and i.enabled]:
     print 'Activate %s...' % (action.name)
     action.actionClip.SetActive(1)
 
     print '\tsetting output path/name:'
-
-    modo.Scene().renderItem.channel('outPat').set('_<FFFF>')
-
     for output in [i for i in modo.Scene().iterItems() if i.type == 'renderOutput']:
-        outputPath = output.channel('filename').get()
-        output.channel('filename').set(outputPath + '_' + action.name)
+        output.channel('filename').set(originalOutputPath + '_' + action.name)
 
     path = lx.eval('query sceneservice scene.file ? current')
     splitpath = os.path.splitext(path)
@@ -23,4 +22,3 @@ for action in [i for i in group.itemGraph('itemGroups').forward() if i.type == l
 
     print '\tSuccess.'
     print '\t++++'
-
