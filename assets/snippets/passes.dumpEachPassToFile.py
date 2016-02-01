@@ -1,8 +1,9 @@
 import modo, os.path
 
+OUTPUT = 'R:\users\adam\output\EXR\studio_01'
+
 group = modo.Scene().item('shots')
 
-originalOutputPath = output.channel('filename').get()
 modo.Scene().renderItem.channel('outPat').set('_<output>_<FFFF>')
 
 for action in [i for i in group.itemGraph('itemGroups').forward() if i.type == lx.symbol.a_ACTIONCLIP and i.enabled]:
@@ -11,7 +12,7 @@ for action in [i for i in group.itemGraph('itemGroups').forward() if i.type == l
 
     print '\tsetting output path/name:'
     for output in [i for i in modo.Scene().iterItems() if i.type == 'renderOutput']:
-        output.channel('filename').set(originalOutputPath + '_' + action.name)
+        output.channel('filename').set(OUTPUT + '_' + action.name)
 
     path = lx.eval('query sceneservice scene.file ? current')
     splitpath = os.path.splitext(path)
