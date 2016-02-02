@@ -1,4 +1,5 @@
-import modo, os.path
+import modo
+from os.path import splitext
 
 """
 By Adam O'Hern for Mechanical Color
@@ -40,11 +41,8 @@ for pass_ in passes:
         restoreOut.append(output.channel('filename').get())
         output.channel('filename').set(OUTPUT + '_' + pass_.name)
 
-    path = lx.eval('query sceneservice scene.file ? current')
-    splitpath = os.path.splitext(path)
-    path = '%s_%s%s' % (splitpath[0], pass_.name, splitpath[1])
-
-    lx.eval('scene.saveAs {%s} $LXOB true' % path )
+    splitpath = splitext(lx.eval('query sceneservice scene.file ? current'))
+    lx.eval('scene.saveAs {%s_%s%s} $LXOB true' % (splitpath[0], pass_.name, splitpath[1]) )
 
     for i, output in enumerate(outputs):
         output.channel('filename').set(restoreOut[i])
