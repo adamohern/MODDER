@@ -36,7 +36,9 @@ for pass_ in passes:
 
     restoreOut = []
     for output in outputs:
-        if not output.channel('filename').get(): continue
+        if not output.channel('filename').get():
+            restoreOut.append('')
+            continue
 
         restoreOut.append(output.channel('filename').get())
         output.channel('filename').set(OUTPUT + '_' + pass_.name)
