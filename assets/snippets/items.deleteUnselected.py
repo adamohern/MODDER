@@ -5,7 +5,16 @@ modo.Scene().renderItem,
 modo.Scene().sceneItem
 ]
 
-for i in modo.Scene().iterItems():
-	if i in ignore or i.selected:
+ignoreTypes = [
+'translation',
+'rotation',
+'scale'
+]
+
+for i in modo.Scene().items():
+	if i in ignore or i.selected or i.type in ignoreTypes:
+		continue	
+	try:
+		modo.Scene().removeItems(i)
+	except:
 		continue
-	modo.Scene().removeItems(i)
