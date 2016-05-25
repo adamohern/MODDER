@@ -1,13 +1,13 @@
-#KOMODO
+#MODDER
 **Open scripting resources for MODO**
 
-KOMODO is an open community project to for sharing usable code snippets and resources for the MODO Python API.
+MODDER is an open community project to for sharing usable code snippets and resources for the MODO Python API.
 
 ##Features:
 - Improved F5 window includes scripting, python console with event log, etc
-- Menubar > Komodo > Dump API - Creates HTML docs for a variety of MODO API's and services, with quick-access links below. Also generates Python dummy code for IDE code completion.
-- Menubar > Komodo > scenes:Primitives - Useful primitives-based test scene.
-- Menubar > Komodo > Restart MODO
+- Menubar > Modder > Dump API - Creates HTML docs for a variety of MODO API's and services, with quick-access links below. Also generates Python dummy code for IDE code completion.
+- Menubar > Modder > scenes:Primitives - Useful primitives-based test scene.
+- Menubar > Modder > Restart MODO
 - Modes Bar > Project Scripts - Lists all ".py" files in the current scene's directory tree for quick access to project-specific scripts.
 - `>>> import komodo` : A framework of usable functions and commands, ready to use.
 

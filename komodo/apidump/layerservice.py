@@ -20,11 +20,11 @@ def layerserviceRef():
     text += '</ul>\n'
 
     text += '</body>\n</html>'
-            
-    kit_path  = lx.eval("query platformservice alias ? {kit_KOMODO:}")
+
+    kit_path  = lx.eval("query platformservice alias ? {kit_MODDER:}")
     f = open(os.path.join(kit_path,'html','layerservice.html'),'w')
     fpath = os.path.abspath(f.name)
-    
+
     try:
         f.write(text)
         lx.out('saved to %s' % fpath)

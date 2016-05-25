@@ -3,9 +3,9 @@
 import re, lx, os.path, gc
 
 def commandserviceRef():
-    
-    kit_path    = lx.eval("query platformservice alias ? {kit_KOMODO:}")
-    
+
+    kit_path    = lx.eval("query platformservice alias ? {kit_MODDER:}")
+
 
     text = '<html>\n<body>\n'
     text += '<head><link rel="stylesheet" type="text/css" href="reset.css"><link rel="stylesheet" type="text/css" href="style.css"></head>'
@@ -22,16 +22,16 @@ def commandserviceRef():
     text += '</ul>\n'
 
     text += '\n\n<h2>commands:</h2>\n\n'
-    
+
     f = open(os.path.join(kit_path,'html','commandservice.html'),'w')
     f.write(text)
     f.close()
 
-    
+
     for command in commands:
-        
+
         text = ""
-        
+
         f = open(os.path.join(kit_path,'html','commandservice.html'),'a')
 
         text += '<h3>'+command+'</h3>\n'
@@ -67,17 +67,17 @@ def commandserviceRef():
         argTypeNames = lx.eval('query commandservice command.argTypeNames ? %s' % command)
         argUsernames = lx.eval('query commandservice command.argUsernames ? %s' % command)
         argDescs = lx.eval('query commandservice command.argDescs ? %s' % command)
-                
+
         if isinstance(argNames,basestring):
             argNames = [argNames]
             argTypeNames = [argTypeNames]
             argUsernames = [argUsernames]
             argDescs = [argDescs]
-        
+
         attributesArrayList += '<li><strong>command.argNames</strong><br />\n<ul>'
-        
+
         if isinstance(argNames,(list,tuple)):
-            
+
             for i in range(len(argNames)):
                 argName = argNames[i]
                 try:
@@ -90,23 +90,23 @@ def commandserviceRef():
                 except:
                     argDesc = 0
                     argUsername = 0
-                    
+
                 attributesArrayList += '<li><strong>%s:</strong> %s' % (argName,argTypeName)
                 if argDesc and argUsername:
                     attributesArrayList += '<br />\n<p>(%s: %s)</p>\n</li>\n' % (argUsername,argDesc)
                 else:
                     attributesArrayList += '</li>\n'
-                
+
             attributesArrayList += '</ul>\n\n'
-            
+
         else:
             attributesArrayList += '<li><span class="light">(none)</span></li></ul>'
-        
+
         attributesArrayList += '</ul>\n</li>\n'
 
         if attributesArrayList != '<ul></ul>\n':
             text += attributesArrayList+'\n\n\n'
-            
+
         f.write(text)
         f.close()
 
@@ -115,7 +115,6 @@ def commandserviceRef():
     text += '</body>\n</html>'
     f.write(text)
     f.close()
-            
-    
-    
-    
+
+
+
