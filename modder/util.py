@@ -8,21 +8,21 @@ def random_color(h=None,s=None,v=None):
     """
     By Adam O'Hern
     Returns a random color using HSV.
-    
+
     :param h: Fixed Hue. If None, a random hue will be used.
     :param s: Fixed Saturation. If None, a random saturation will be used.
     :param v: Fixed Value. If None, a random value will be used.
     """
     import colorsys, random
-    
+
     h = random.random() if h == None else h
     s = random.random() if s == None else s
     v = random.random() if v == None else v
-    
+
     return colorsys.hsv_to_rgb(h, s, v)
 
 
-def quick_user_value(valHandle='komodo_tmp',valType='string',nicename='String',default=''):
+def quick_user_value(valHandle='modder_tmp',valType='string',nicename='String',default=''):
     """
     By Adam O'Hern
     Creates a new user value, requests that value of the user, then returns the result.
@@ -37,12 +37,12 @@ def quick_user_value(valHandle='komodo_tmp',valType='string',nicename='String',d
         return lx.eval('user.value %s value:?' % valHandle)
     except:
         return None
-    
+
 def get_imagesavers():
-    """ 
+    """
     By The Foundry
     http://sdk.luxology.com/wiki/Snippet:Image_Savers
-    
+
     Returns a list of available image savers. Each entry in the returned list
        is a tuple made up of the format's internal name, it's username and it's
        DOS type (extension).

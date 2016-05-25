@@ -9,9 +9,9 @@ MODDER is an open community project to for sharing usable code snippets and reso
 - Menubar > Modder > scenes:Primitives - Useful primitives-based test scene.
 - Menubar > Modder > Restart MODO
 - Modes Bar > Project Scripts - Lists all ".py" files in the current scene's directory tree for quick access to project-specific scripts.
-- `>>> import komodo` : A framework of usable functions and commands, ready to use.
+- `>>> import modder` : A framework of usable functions and commands, ready to use.
 
-- `> komodo.symbolsearch {searchTerm}` : Search the `lx.symbol.*` module for keys or values matching the search term.
+- `> modder.symbolsearch {searchTerm}` : Search the `lx.symbol.*` module for keys or values matching the search term.
 - A library of code snippets for copy/paste code bashing
 
 ##To Do:

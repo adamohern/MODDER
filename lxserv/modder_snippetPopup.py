@@ -19,7 +19,7 @@
 import lx
 import lxifc
 import lxu.command
-import komodo
+import modder
 
 from os import walk
 from os.path import join
@@ -86,7 +86,7 @@ class snippetsPopupCmd(lxu.command.BasicCommand):
     def arg_UIValueHints(self, index):
         # create an instance of our pop-up list object passing it the
         # list of commands.
-        kit_path  = komodo.path.expand_alias('kit_MODDER:')
+        kit_path  = modder.path.expand_alias('kit_MODDER:')
         snippets_path = join(kit_path,'assets','snippets')
         if index == 0:
             return snippetsPopup(snippets_path)
@@ -100,24 +100,24 @@ class snippetsPopupCmd(lxu.command.BasicCommand):
         # example we'll use a UserValue.
         if self.dyna_IsSet(0):
             if self.dyna_String(0) == NEW:
-                lx.eval('@komodo.newSnippet.py')
+                lx.eval('@modder.newSnippet.py')
             elif self.dyna_String(0) == DIV:
                 pass
             elif self.dyna_IsSet(1) and self.dyna_String(1) == 'scripteditor':
 
-                if komodo.scripteditor.exists():
-                    komodo.scripteditor.clear_output()
+                if modder.scripteditor.exists():
+                    modder.scripteditor.clear_output()
 
-                    path = join(komodo.path.expand_alias('kit_MODDER:'),'assets','snippets',self.dyna_String(0))
-                    komodo.scripteditor.append_output('loading %s' % path)
+                    path = join(modder.path.expand_alias('kit_MODDER:'),'assets','snippets',self.dyna_String(0))
+                    modder.scripteditor.append_output('loading %s' % path)
 
                     try:
 
                         with open(path, 'r') as script_file:
-                            komodo.scripteditor.insert_script(re.sub('^#.*python\n*','',script_file.read()))
+                            modder.scripteditor.insert_script(re.sub('^#.*python\n*','',script_file.read()))
 
                     except:
-                        komodo.scripteditor.append_output('File could not be opened.')
+                        modder.scripteditor.append_output('File could not be opened.')
 
                 else:
                     lx.out('No script editor available.')
@@ -140,4 +140,4 @@ class snippetsPopupCmd(lxu.command.BasicCommand):
         return lx.result.OK
 
 # bless() the command to register it as a plugin
-lx.bless(snippetsPopupCmd, "komodo.snippetsPopup")
+lx.bless(snippetsPopupCmd, "modder.snippetsPopup")

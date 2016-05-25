@@ -2,17 +2,17 @@
 
 import lx, lxu
 
-NAME_CMD = "komodo.symbolsearch"
+NAME_CMD = "modder.symbolsearch"
 
 class CMD_DUI(lxu.command.BasicCommand):
-  
+
   def __init__(self):
     lxu.command.BasicCommand.__init__(self)
     self.dyna_Add('search', lx.symbol.sTYPE_STRING)
-  
+
   def basic_Execute(self, msg, flags):
     text = self.dyna_String(0)
-    
+
     # Create a dict of all symbols and their values
     dict = {str( getattr( lx.symbol, i) ) : i for i in dir(lx.symbol) }
     # Filter for keyword
